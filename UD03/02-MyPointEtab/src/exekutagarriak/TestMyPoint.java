@@ -29,7 +29,7 @@ public class TestMyPoint {
 
         ArrayList<MyPoint> puntuak = new ArrayList<MyPoint>();
         for (int i = 0; i < 5; i++) {
-            puntuak.add(new MyPoint((int) (Math.random() * 9 + 1), (int) (Math.random() * 9 + 1)));
+            puntuak.add(new MyPoint((int) (Math.random() * 9), (int) (Math.random() * 9 )));
         }
         System.out.println(puntuak);
         
