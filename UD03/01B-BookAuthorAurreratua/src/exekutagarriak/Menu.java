@@ -126,7 +126,6 @@ public class Menu {
             for (Book b : liburuak) {
 
             System.out.println(i + ". " + b.getName());
-
         }
     }
 }
