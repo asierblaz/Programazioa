@@ -34,7 +34,8 @@ public class MyCircle {
 
     public double getArea() {
 
-        return Math.PI * radius + radius;
+        return Math.PI * radius *
+          radius;
     }
 
     public int getCenterX() {

@@ -29,11 +29,11 @@ public class TestMyPoint {
 
         ArrayList<MyPoint> puntuak = new ArrayList<MyPoint>();
         for (int i = 0; i < 5; i++) {
-            puntuak.add(new MyPoint((int) (Math.random() * 9), (int) (Math.random() * 9 )));
+            puntuak.add(new MyPoint((int) (Math.random() * 9), (int) (Math.random() * 9)));
         }
         System.out.println(puntuak);
-        
-        
+
+        marraztu(p1);
 
     }
 
@@ -45,5 +45,26 @@ public class TestMyPoint {
             points[i] = new MyPoint(i + 1, i + 1);
         }
         return points;
+    }
+
+    /**
+     *
+     * @param grafikoa
+     * @param punto
+     */
+    public static void marraztu(MyPoint punto) {
+        System.out.println("y");
+
+        for (int i = 0; i <= punto.getY() + 1; i++) {
+            System.out.println("|");
+
+        }
+
+        for (int i = 0; i <= punto.getX() + 1; i++) {
+            System.out.print("__");
+
+        }
+        System.out.print("x");
+
     }
 }
