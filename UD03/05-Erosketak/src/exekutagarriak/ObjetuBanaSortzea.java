@@ -5,10 +5,16 @@
  */
 package exekutagarriak;
 
+import model.*;
+
 /**
  *
  * @author blazquez.asier
  */
 public class ObjetuBanaSortzea {
     
+    public static void main(String[] args) {
+        Bezeroa karlos = new Pertsona(1, "karlos", "Arguiñano", "Hondartza pasialekua", "kargi@zarautz.eus");
+        System.out.println("Karlos = >" + karlos);
+    }
 }

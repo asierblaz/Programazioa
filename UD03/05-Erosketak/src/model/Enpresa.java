@@ -17,6 +17,15 @@ public class Enpresa implements Bezeroa {
     private String helbidea;
     private String[] kontaktoenEmailak;
 
+    public Enpresa(int kodea, String izenJuridikoa, String izenKomertziala, String helbidea, String[] kontaktoenEmailak) {
+        this.kodea = kodea;
+        this.izenJuridikoa = izenJuridikoa;
+        this.izenKomertziala = izenKomertziala;
+        this.helbidea = helbidea;
+        this.kontaktoenEmailak = kontaktoenEmailak;
+    }
+
+    
     @Override
     public int getKodea() {
         return kodea;

@@ -48,7 +48,7 @@ public class Erosketa {
         return "Erosketa{" + "kodea=" + kodea + ", data=" + data + ", bezeroa=" + bezeroa + ", produktuak=" + produktuak + ", unitateak=" + unitateak + ", guztira=" + guztira + '}';
     }
 
-    public boolean guztiraEgiaztatu(){ //
+    public boolean guztiraEgiaztatu(){ // informazio erredundantea dagoela
     
     return true;
     }
