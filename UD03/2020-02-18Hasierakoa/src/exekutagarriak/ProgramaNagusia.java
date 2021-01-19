@@ -59,7 +59,9 @@ public class ProgramaNagusia {
     }
 
     public static void jaiotzeDataBete() {
- try {
+        try {
+            
+        
         System.out.print("Zein idazleren jaiotze data nahi duzu bete (Idatzi posizioa)? ");
         Scanner in = new Scanner(System.in);
         int pos = in.nextInt() - 1;
@@ -67,11 +69,12 @@ public class ProgramaNagusia {
        
             idazleak[pos].setBirthday(in.next());
             System.out.println("Jaiotze-data ondo erregistratu da.");
-        } catch (Exception e) {
-            System.out.println("Data okerra.");
+        } catch (Exception ex) {
+               System.out.println("Data okerra.");
             System.out.println("Hurrengo baten sartuko duzu data.");
-
+        
         }
+       
         
         System.out.println("");
 

@@ -9,6 +9,11 @@ package model;
  *
  * @author blazquez.asier
  */
-class Bezeroa {
+public interface Bezeroa {
+    
+    public int getKodea();
+    public String getIzena();
+    public String getHelbidea();
+    public String getEmaila();
     
 }
