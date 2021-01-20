@@ -20,5 +20,23 @@ public class ErosketakKudeatu {
     private ArrayList<Erosketa> erosektenZerrenda = new ArrayList<>();
     
     
+    public static void main(String[] args) {
+        
+    }
     
+    public static void initialize(){}
+    
+    public static int menuNagusiaErakutsi(){
+    return 0;
+    }
+    
+    public static void create(){}
+    
+    public static void recover(){}
+    
+    public static void delete(){}
+    
+    public static int readMenuaErakutsi(){
+    return 0;
+    }
 }
