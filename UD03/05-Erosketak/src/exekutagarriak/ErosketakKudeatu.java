@@ -37,6 +37,7 @@ public class ErosketakKudeatu {
     public static void delete(){}
     
     public static int readMenuaErakutsi(){
+        
     return 0;
     }
 }
