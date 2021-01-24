@@ -24,7 +24,9 @@ public class ErosketakKudeatu {
         
     }
     
-    public static void initialize(){}
+    public static void initialize(){
+    
+    }
     
     public static int menuNagusiaErakutsi(){
     return 0;
