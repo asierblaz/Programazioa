@@ -15,7 +15,7 @@ import model.*;
  */
 public class ErosketakKudeatu {
     
-    private ArrayList<Bezeroa> kontaktuak = new ArrayList<>();
+    private static ArrayList<Bezeroa> kontaktuak = new ArrayList<>();
     private ArrayList<Produktua> produktuKatalogoa = new ArrayList<>();
     private ArrayList<Erosketa> erosektenZerrenda = new ArrayList<>();
     
@@ -25,7 +25,10 @@ public class ErosketakKudeatu {
     }
     
     public static void initialize(){
+        
+        String a[] = null;
     
+
     }
     
     public static int menuNagusiaErakutsi(){
