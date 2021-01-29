@@ -20,11 +20,8 @@ public class Elikagaia extends Produktua {
 
     @Override
     public boolean isArduratsua() {
-        if (ekologikoa == true) {
-            return true;
-        } else {
-            return false;
-        }
+
+        return ekologikoa;
 
     }
 
@@ -32,7 +29,5 @@ public class Elikagaia extends Produktua {
     public String toString() {
         return "Elikagaia";
     }
-    
-    
-    
+
 }
