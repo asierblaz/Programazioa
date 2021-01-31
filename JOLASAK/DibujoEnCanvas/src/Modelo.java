@@ -230,6 +230,7 @@ public class Modelo extends Canvas implements ActionListener, MouseListener, Mou
         this.img = imagen;
         this.erase();
         repaint();
+        
     }
 
     public void changeStrk(int v) {

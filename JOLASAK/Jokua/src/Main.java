@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Marrazkia m1 = new Marrazkia(1, "CASA");
+        Marrazkia m1 = new Marrazkia(1, "CASA","casa");
         System.out.println(m1.getId());
         System.out.println(m1.getIzena());
         System.out.println(m1.getLetraZenbakia());
@@ -23,6 +23,7 @@ public class Main {
         System.out.print("Sartu hitz bat");
         
         String palabra = in.next();
+        
         
         if (palabra.equals(m1.getIzena())){
             System.out.println("las palabras coinciden");

@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 
@@ -21,28 +22,33 @@ public class Asmatu extends javax.swing.JFrame {
         initComponents();
         sortu();
     }
-    Marrazkia m1 = new Marrazkia(1, "CASA");
-    
-        private static ArrayList<Marrazkia> marrazkiak;
-        
 
+    public int aleatorio;
+    private static ArrayList<Marrazkia> marrazkiak;
 
-
-    public void sortu() {
-        int id =0;
+    public  void sortu() {
+        int id = 0;
         marrazkiak = new ArrayList<>();
-        marrazkiak.add(new Marrazkia(id++, "CASA"));
-        marrazkiak.add(new Marrazkia(id++, "COCHE"));
-        marrazkiak.add(new Marrazkia(id++, "EDIFICIO"));
-        marrazkiak.add(new Marrazkia(id++, "AVION"));
+        marrazkiak.add(new Marrazkia(id++, "CASA", "casa"));
+        marrazkiak.add(new Marrazkia(id++, "COCHE", "coche"));
+        marrazkiak.add(new Marrazkia(id++, "EDIFICIO", "edificio"));
+        /*  marrazkiak.add(new Marrazkia(id++, "AVION"));
         marrazkiak.add(new Marrazkia(id++, "ORDENADOR"));
         marrazkiak.add(new Marrazkia(id++, "MESA"));
         marrazkiak.add(new Marrazkia(id++, "TECLADO"));
-        marrazkiak.add(new Marrazkia(id++, "PANTALLA"));
-   int aleatorio = (int) (Math.random()*marrazkiak.size());
+        marrazkiak.add(new Marrazkia(id++, "PANTALLA"));*/
 
-        argazkia.setText(marrazkiak.get(aleatorio).getIzena());
+        //argazkia.setText(marrazkiak.get(aleatorio).getIzena());
+    }
 
+    public void aldatuArgazkia() {
+        aleatorio = (int) (Math.random() * marrazkiak.size());
+        argazkia.setIcon(new javax.swing.ImageIcon(getClass().getResource(marrazkiak.get(aleatorio).getImagen())));
+
+    }
+    
+    public static void ArrayeanGehitu(Marrazkia m){ 
+            marrazkiak.add(m);
     }
 
     /**
@@ -58,9 +64,12 @@ public class Asmatu extends javax.swing.JFrame {
         palabraIntro = new javax.swing.JTextField();
         frogratu = new javax.swing.JButton();
         argazkia = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        cambiar = new javax.swing.JButton();
+        abrirButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 153));
+        setMinimumSize(new java.awt.Dimension(1400, 1100));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         titulo.setAlignment(java.awt.Label.CENTER);
@@ -68,7 +77,7 @@ public class Asmatu extends javax.swing.JFrame {
         titulo.setFont(new java.awt.Font("Comic Sans MS", 1, 48)); // NOI18N
         titulo.setForeground(new java.awt.Color(102, 102, 255));
         titulo.setText("ASMATU ");
-        getContentPane().add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, -10, 420, 80));
+        getContentPane().add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 420, 80));
         titulo.getAccessibleContext().setAccessibleName("");
 
         palabraIntro.setToolTipText("");
@@ -77,7 +86,7 @@ public class Asmatu extends javax.swing.JFrame {
                 palabraIntroActionPerformed(evt);
             }
         });
-        getContentPane().add(palabraIntro, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 280, 180, 40));
+        getContentPane().add(palabraIntro, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 810, 180, 40));
 
         frogratu.setText("Frogatu");
         frogratu.addActionListener(new java.awt.event.ActionListener() {
@@ -85,16 +94,26 @@ public class Asmatu extends javax.swing.JFrame {
                 frogratuActionPerformed(evt);
             }
         });
-        getContentPane().add(frogratu, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 380, 110, 50));
-        getContentPane().add(argazkia, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 340, 240));
+        getContentPane().add(frogratu, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 810, 110, 50));
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        argazkia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/blanco.png"))); // NOI18N
+        getContentPane().add(argazkia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 1020, 660));
+
+        cambiar.setText("Beste Bat");
+        cambiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cambiarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, -1, -1));
+        getContentPane().add(cambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 810, 150, 40));
+
+        abrirButton.setText("Abrir");
+        abrirButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abrirButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(abrirButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 800, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -105,10 +124,8 @@ public class Asmatu extends javax.swing.JFrame {
 
     private void frogratuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frogratuActionPerformed
         // TODO add your handling code here:
-        
-        
-     
-        if (palabraIntro.getText().toUpperCase().equals(argazkia.getText())) {
+
+        if (palabraIntro.getText().toUpperCase().equals(marrazkiak.get(aleatorio).getIzena())) {
             showMessageDialog(null, "LAS PALABRAS COINCIDEN", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
         } else {
             showMessageDialog(null, "LAS PLABRAS NO COINCIDEN", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
@@ -117,11 +134,19 @@ public class Asmatu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_frogratuActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarActionPerformed
         // TODO add your handling code here:
-        
-        sortu();
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+        aldatuArgazkia();
+
+    }//GEN-LAST:event_cambiarActionPerformed
+
+    private void abrirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirButtonActionPerformed
+        // TODO add your handling code here:
+      
+        JFrame entrar = new MarraztuGUI();
+	entrar.setVisible(true);
+    }//GEN-LAST:event_abrirButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,9 +184,10 @@ public class Asmatu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton abrirButton;
     private javax.swing.JLabel argazkia;
+    private javax.swing.JButton cambiar;
     private javax.swing.JButton frogratu;
-    private javax.swing.JButton jButton1;
     private javax.swing.JTextField palabraIntro;
     private java.awt.Label titulo;
     // End of variables declaration//GEN-END:variables

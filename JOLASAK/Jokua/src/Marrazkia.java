@@ -11,12 +11,13 @@
 public class Marrazkia {
     private int id;
     private String izena;
-    //ruta imagen
-    private int letraZenbakia;
+    private String imagen; //        prueba.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img1.jpg"))); 
+
     
-    public Marrazkia(int id, String izena) {
+    public Marrazkia(int id, String izena, String imagen) {
         this.id = id;
         this.izena = izena;
+        this.imagen = "/img/"+imagen.toLowerCase()+".png";
     }
 
     public int getId() {
@@ -32,6 +33,11 @@ public class Marrazkia {
        
         return  izena.length();
     }
+
+    public String getImagen() {
+        return imagen;
+    }
+    
     
     
     
