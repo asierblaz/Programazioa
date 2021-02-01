@@ -22,6 +22,7 @@ import javax.swing.JSlider;
 public class MarraztuGUI extends javax.swing.JFrame {
 
     private Dibujar lienzo;
+        JFrame frame = new JFrame("Lienzo");
 
     /**
      * Creates new form GUIPRUEBA
@@ -35,7 +36,6 @@ public class MarraztuGUI extends javax.swing.JFrame {
     public void verLienzo() {
         // create main frame
 
-        JFrame frame = new JFrame("Lienzo");
         Container content = frame.getContentPane();
         content.setLayout(new BorderLayout());
         lienzo = new Dibujar();
@@ -132,6 +132,7 @@ public class MarraztuGUI extends javax.swing.JFrame {
             System.out.println( MainGUI.marrazkiak);
            JOptionPane.showMessageDialog(null, "Marrazkia Gorde da", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
+            frame.dispose();
 
         }
 

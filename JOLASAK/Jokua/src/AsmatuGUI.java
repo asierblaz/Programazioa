@@ -16,8 +16,8 @@ import static javax.swing.JOptionPane.showMessageDialog;
  * @author blazquez.asier
  */
 public class AsmatuGUI extends javax.swing.JFrame {
-
-    public int aleatorio;
+    private final int puntuazioa =0; 
+    private int aleatorio;
     /**
      * Creates new form Asmatu
      */
@@ -52,6 +52,7 @@ public class AsmatuGUI extends javax.swing.JFrame {
         argazkia = new javax.swing.JLabel();
         cambiar = new javax.swing.JButton();
         abrirButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 153));
@@ -83,7 +84,7 @@ public class AsmatuGUI extends javax.swing.JFrame {
         getContentPane().add(frogratu, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 810, 110, 50));
 
         argazkia.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(argazkia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 1020, 660));
+        getContentPane().add(argazkia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 700, 700));
 
         cambiar.setText("Beste Bat");
         cambiar.addActionListener(new java.awt.event.ActionListener() {
@@ -100,6 +101,9 @@ public class AsmatuGUI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(abrirButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 800, -1, -1));
+
+        jLabel1.setText("Puntuazioa");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 100, 70, 80));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -175,6 +179,7 @@ public class AsmatuGUI extends javax.swing.JFrame {
     private javax.swing.JLabel argazkia;
     private javax.swing.JButton cambiar;
     private javax.swing.JButton frogratu;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField palabraIntro;
     private java.awt.Label titulo;
     // End of variables declaration//GEN-END:variables
