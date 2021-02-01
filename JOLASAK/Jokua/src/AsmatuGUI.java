@@ -17,6 +17,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
  */
 public class AsmatuGUI extends javax.swing.JFrame {
 
+    public int aleatorio;
     /**
      * Creates new form Asmatu
      */
@@ -24,32 +25,18 @@ public class AsmatuGUI extends javax.swing.JFrame {
    // private ImageIcon icon;
     public AsmatuGUI() {
         initComponents();
+        aldatuArgazkia();
                 
-        sortu();
     }
-     static ArrayList<Marrazkia> marrazkiak;
 
-    public int aleatorio;
 
-    public  void sortu() {
-        int id = 0;
-        marrazkiak = new ArrayList<>();
-        marrazkiak.add(new Marrazkia(id++, "h", "h"));
-       /* marrazkiak.add(new Marrazkia(id++, "COCHE", "coche"));
-        marrazkiak.add(new Marrazkia(id++, "EDIFICIO", "edificio"));*/
-       
-    }
 
     public void aldatuArgazkia() {
-        aleatorio = (int) (Math.random() * marrazkiak.size());
-        //icon= new ImageIcon(getClass().getResourcse(marrazkiak.get(aleatorio).getImagen()));
-       argazkia.setIcon(new javax.swing.ImageIcon(getClass().getResource(marrazkiak.get(aleatorio).getImagen())));
-    //  argazkia.setIcon(icon);
+        aleatorio = (int) (Math.random() * MainGUI.marrazkiak.size());
+       argazkia.setIcon(new javax.swing.ImageIcon(getClass().getResource(MainGUI.marrazkiak.get(aleatorio).getImagen())));
 
     }
-    public static void ArrayeanGehitu(Marrazkia m){ 
-            marrazkiak.add(m);
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,7 +83,6 @@ public class AsmatuGUI extends javax.swing.JFrame {
         getContentPane().add(frogratu, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 810, 110, 50));
 
         argazkia.setForeground(new java.awt.Color(255, 255, 255));
-        argazkia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/casa.png"))); // NOI18N
         getContentPane().add(argazkia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 1020, 660));
 
         cambiar.setText("Beste Bat");
@@ -124,8 +110,8 @@ public class AsmatuGUI extends javax.swing.JFrame {
 
     private void frogratuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frogratuActionPerformed
         // TODO add your handling code here:
-            System.out.println(marrazkiak.get(aleatorio).getIzena());
-        if (palabraIntro.getText().toLowerCase().equals(marrazkiak.get(aleatorio).getIzena())) {
+            System.out.println(MainGUI.marrazkiak.get(aleatorio).getIzena());
+        if (palabraIntro.getText().toLowerCase().equals(MainGUI.marrazkiak.get(aleatorio).getIzena())) {
             showMessageDialog(null, "LAS PALABRAS COINCIDEN", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
         } else {
             showMessageDialog(null, "LAS PLABRAS NO COINCIDEN", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
@@ -138,7 +124,7 @@ public class AsmatuGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         aldatuArgazkia();
-        System.out.println(marrazkiak);
+        System.out.println(MainGUI.marrazkiak);
 
     }//GEN-LAST:event_cambiarActionPerformed
 

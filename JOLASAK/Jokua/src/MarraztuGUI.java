@@ -128,8 +128,8 @@ public class MarraztuGUI extends javax.swing.JFrame {
             Marrazkia m = new Marrazkia(1, izena, imagen);
             System.out.println(m);
             lienzo.save(m);
-            AsmatuGUI.ArrayeanGehitu(m);
-            System.out.println( AsmatuGUI.marrazkiak);
+            MainGUI.ArrayeanGehitu(m);
+            System.out.println( MainGUI.marrazkiak);
            JOptionPane.showMessageDialog(null, "Marrazkia Gorde da", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
 

@@ -14,19 +14,27 @@ import javax.swing.JFrame;
  */
 public class MainGUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainGUI
-     */
-    
+        static ArrayList<Marrazkia> marrazkiak;
+
+
     public MainGUI() {
         initComponents();
-
+        sortu();
     }
 
     
     
+    public  void sortu() {
+        int id = 0;
+        marrazkiak = new ArrayList<>();
+        marrazkiak.add(new Marrazkia(id++, "h", "h"));
+       
+       
+    }
 
-    
+        public static void ArrayeanGehitu(Marrazkia m){ 
+            marrazkiak.add(m);
+    }
         
 
 
