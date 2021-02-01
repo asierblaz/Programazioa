@@ -19,6 +19,8 @@ public class Marrazkia {
         this.izena = izena;
         this.argazkiIzena= imagen.toLowerCase();
         this.imagen = "/img/"+imagen.toLowerCase()+".png";
+         //this.imagen = "/img/"+imagen.toLowerCase()+".png";
+
     }
 
     public int getId() {

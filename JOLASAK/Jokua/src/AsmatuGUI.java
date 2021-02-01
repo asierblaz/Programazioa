@@ -1,6 +1,7 @@
 
 
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -19,6 +20,8 @@ public class AsmatuGUI extends javax.swing.JFrame {
     /**
      * Creates new form Asmatu
      */
+    
+   // private ImageIcon icon;
     public AsmatuGUI() {
         initComponents();
                 
@@ -39,7 +42,9 @@ public class AsmatuGUI extends javax.swing.JFrame {
 
     public void aldatuArgazkia() {
         aleatorio = (int) (Math.random() * marrazkiak.size());
-        argazkia.setIcon(new javax.swing.ImageIcon(getClass().getResource(marrazkiak.get(aleatorio).getImagen())));
+        //icon= new ImageIcon(getClass().getResourcse(marrazkiak.get(aleatorio).getImagen()));
+       argazkia.setIcon(new javax.swing.ImageIcon(getClass().getResource(marrazkiak.get(aleatorio).getImagen())));
+    //  argazkia.setIcon(icon);
 
     }
     public static void ArrayeanGehitu(Marrazkia m){ 
@@ -119,8 +124,8 @@ public class AsmatuGUI extends javax.swing.JFrame {
 
     private void frogratuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frogratuActionPerformed
         // TODO add your handling code here:
-
-        if (palabraIntro.getText().toUpperCase().equals(marrazkiak.get(aleatorio).getIzena())) {
+            System.out.println(marrazkiak.get(aleatorio).getIzena());
+        if (palabraIntro.getText().toLowerCase().equals(marrazkiak.get(aleatorio).getIzena())) {
             showMessageDialog(null, "LAS PALABRAS COINCIDEN", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
         } else {
             showMessageDialog(null, "LAS PLABRAS NO COINCIDEN", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
