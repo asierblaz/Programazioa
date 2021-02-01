@@ -1,9 +1,14 @@
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Frame;
+import javax.swing.JColorChooser;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showConfirmDialog;
+import javax.swing.JSlider;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,15 +21,16 @@ import static javax.swing.JOptionPane.showConfirmDialog;
  */
 public class MarraztuGUI extends javax.swing.JFrame {
 
+    private Dibujar lienzo;
+
     /**
      * Creates new form GUIPRUEBA
      */
     public MarraztuGUI() {
         initComponents();
         verLienzo();
-    }
 
-    Dibujar lienzo;
+    }
 
     public void verLienzo() {
         // create main frame
@@ -53,15 +59,18 @@ public class MarraztuGUI extends javax.swing.JFrame {
 
         label1 = new java.awt.Label();
         GordeButton = new javax.swing.JButton();
+        anchoButton = new javax.swing.JButton();
+        colorButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        borragomaButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Herramientas");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         label1.setText("Herramientas");
         getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 140, 60));
-        label1.getAccessibleContext().setAccessibleName("Herramientas");
 
         GordeButton.setText("Gorde");
         GordeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -69,26 +78,93 @@ public class MarraztuGUI extends javax.swing.JFrame {
                 GordeButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(GordeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, -1, -1));
+        getContentPane().add(GordeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+
+        anchoButton.setText("Loditasuna");
+        anchoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anchoButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(anchoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
+
+        colorButton.setText("Kolorea");
+        colorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                colorButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(colorButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 90, 30));
+
+        jButton1.setText("Borratu Guztia");
+        jButton1.setActionCommand("Borratu");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, -1, -1));
+
+        borragomaButton.setText("Borragoma");
+        borragomaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borragomaButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(borragomaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void GordeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GordeButtonActionPerformed
         // TODO add your handling code here:
-        
-        int input = showConfirmDialog(null, " Marrazkia Gorde nahi duzu?");
-        
-        if(input==0){
-          Marrazkia m = new Marrazkia(1, "dibu", "dibu");
-          lienzo.savee(m);
-          Asmatu.ArrayeanGehitu(m);
-          
-        
-        
+
+        int input = showConfirmDialog(null, " Marrazkia Gorde nahi duzu");
+
+        if (input == 0) {
+            String izena = JOptionPane.showInputDialog("Zer da marraztu duzuna?:");
+            String imagen = JOptionPane.showInputDialog("Zein izena jarriko diozu?:");
+
+            Marrazkia m = new Marrazkia(1, izena, imagen);
+            System.out.println(m);
+            lienzo.save(m);
+            AsmatuGUI.ArrayeanGehitu(m);
+            System.out.println( AsmatuGUI.marrazkiak);
+           JOptionPane.showMessageDialog(null, "Marrazkia Gorde da", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+
         }
 
     }//GEN-LAST:event_GordeButtonActionPerformed
+
+    private void anchoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anchoButtonActionPerformed
+        // TODO add your handling code here:
+        String ancho = JOptionPane.showInputDialog("Sartu pintzelaren loditasuna:");
+
+        lienzo.anchura(Integer.parseInt(ancho));
+
+
+    }//GEN-LAST:event_anchoButtonActionPerformed
+
+    private void colorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorButtonActionPerformed
+        // TODO add your handling code here:
+
+        Color c = JColorChooser.showDialog(rootPane, "Aukeratu Kolorea", Color.black);
+
+        lienzo.koloreaAldatu(c);
+    }//GEN-LAST:event_colorButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        lienzo.clear();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void borragomaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borragomaButtonActionPerformed
+        // TODO add your handling code here:
+
+        lienzo.borragoma();
+    }//GEN-LAST:event_borragomaButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,13 +201,17 @@ public class MarraztuGUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MarraztuGUI().setVisible(true);
-                
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GordeButton;
+    private javax.swing.JButton anchoButton;
+    private javax.swing.JButton borragomaButton;
+    private javax.swing.JButton colorButton;
+    private javax.swing.JButton jButton1;
     private java.awt.Label label1;
     // End of variables declaration//GEN-END:variables
 }

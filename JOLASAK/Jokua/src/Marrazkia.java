@@ -11,12 +11,13 @@
 public class Marrazkia {
     private int id;
     private String izena;
-    private String imagen; //        prueba.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img1.jpg"))); 
-
+    private String imagen; //        prueba.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img1.jpg")));  argazkia imprimatzeko
+     private String argazkiIzena; // argazkia gero gordetzeko
     
     public Marrazkia(int id, String izena, String imagen) {
         this.id = id;
         this.izena = izena;
+        this.argazkiIzena= imagen.toLowerCase();
         this.imagen = "/img/"+imagen.toLowerCase()+".png";
     }
 
@@ -28,6 +29,10 @@ public class Marrazkia {
         return izena;
     }
 
+    public String getArgazkiIzena() {
+        return argazkiIzena;
+    }
+
     public int getLetraZenbakia() {
         
        
@@ -36,6 +41,11 @@ public class Marrazkia {
 
     public String getImagen() {
         return imagen;
+    }
+
+    @Override
+    public String toString() {
+        return "Marrazkia{" + "id=" + id + ", izena=" + izena + ", imagen=" + imagen + ", argazkiIzena=" + argazkiIzena + '}';
     }
     
     

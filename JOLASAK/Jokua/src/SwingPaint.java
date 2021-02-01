@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class SwingPaint {
-
+/*
     JButton clearBtn, blackBtn, blueBtn, greenBtn, redBtn, magentaBtn, savebtn;
     Dibujar drawArea;
     ActionListener actionListener = new ActionListener() {
@@ -90,5 +90,5 @@ public class SwingPaint {
 
         // Now you can try our Swing Paint !!! Enjoy :D
     }
-
+*/
 }

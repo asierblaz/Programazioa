@@ -1,4 +1,5 @@
 
+
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -13,32 +14,27 @@ import static javax.swing.JOptionPane.showMessageDialog;
  *
  * @author blazquez.asier
  */
-public class Asmatu extends javax.swing.JFrame {
+public class AsmatuGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form Asmatu
      */
-    public Asmatu() {
+    public AsmatuGUI() {
         initComponents();
+                
         sortu();
     }
+     static ArrayList<Marrazkia> marrazkiak;
 
     public int aleatorio;
-    private static ArrayList<Marrazkia> marrazkiak;
 
     public  void sortu() {
         int id = 0;
         marrazkiak = new ArrayList<>();
-        marrazkiak.add(new Marrazkia(id++, "CASA", "casa"));
-        marrazkiak.add(new Marrazkia(id++, "COCHE", "coche"));
-        marrazkiak.add(new Marrazkia(id++, "EDIFICIO", "edificio"));
-        /*  marrazkiak.add(new Marrazkia(id++, "AVION"));
-        marrazkiak.add(new Marrazkia(id++, "ORDENADOR"));
-        marrazkiak.add(new Marrazkia(id++, "MESA"));
-        marrazkiak.add(new Marrazkia(id++, "TECLADO"));
-        marrazkiak.add(new Marrazkia(id++, "PANTALLA"));*/
-
-        //argazkia.setText(marrazkiak.get(aleatorio).getIzena());
+        marrazkiak.add(new Marrazkia(id++, "h", "h"));
+       /* marrazkiak.add(new Marrazkia(id++, "COCHE", "coche"));
+        marrazkiak.add(new Marrazkia(id++, "EDIFICIO", "edificio"));*/
+       
     }
 
     public void aldatuArgazkia() {
@@ -46,11 +42,9 @@ public class Asmatu extends javax.swing.JFrame {
         argazkia.setIcon(new javax.swing.ImageIcon(getClass().getResource(marrazkiak.get(aleatorio).getImagen())));
 
     }
-    
     public static void ArrayeanGehitu(Marrazkia m){ 
             marrazkiak.add(m);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,7 +61,7 @@ public class Asmatu extends javax.swing.JFrame {
         cambiar = new javax.swing.JButton();
         abrirButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 153));
         setMinimumSize(new java.awt.Dimension(1400, 1100));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -96,7 +90,8 @@ public class Asmatu extends javax.swing.JFrame {
         });
         getContentPane().add(frogratu, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 810, 110, 50));
 
-        argazkia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/blanco.png"))); // NOI18N
+        argazkia.setForeground(new java.awt.Color(255, 255, 255));
+        argazkia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/casa.png"))); // NOI18N
         getContentPane().add(argazkia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 1020, 660));
 
         cambiar.setText("Beste Bat");
@@ -138,12 +133,12 @@ public class Asmatu extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         aldatuArgazkia();
+        System.out.println(marrazkiak);
 
     }//GEN-LAST:event_cambiarActionPerformed
 
     private void abrirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirButtonActionPerformed
         // TODO add your handling code here:
-      
         JFrame entrar = new MarraztuGUI();
 	entrar.setVisible(true);
     }//GEN-LAST:event_abrirButtonActionPerformed
@@ -165,20 +160,21 @@ public class Asmatu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Asmatu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AsmatuGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Asmatu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AsmatuGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Asmatu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AsmatuGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Asmatu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AsmatuGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Asmatu().setVisible(true);
+                new AsmatuGUI().setVisible(true);
             }
         });
     }
