@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class AsmatuGUI extends javax.swing.JFrame {
 
     private final int puntuazioa = 0;
-    private int aleatorio = 0;
+    private  int aleatorio= -1;
 
     /**
      * Creates new form Asmatu
@@ -24,20 +24,20 @@ public class AsmatuGUI extends javax.swing.JFrame {
     // private ImageIcon icon;
     public AsmatuGUI() {
         initComponents();
+        Collections.shuffle(MainGUI.marrazkiak);
         aldatuArgazkia();
 
     }
 
     public void aldatuArgazkia() {
-
-        //  aleatorio = (int) (Math.random() * MainGUI.marrazkiak.size());           
+        aleatorio++;
+       // aleatorio = (int) (Math.random() * MainGUI.marrazkiak.size());           
         if (aleatorio == MainGUI.marrazkiak.size() - 1) {
             JOptionPane.showMessageDialog(null, "Partida amaituta", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
             cambiar.setVisible(false);
         } else {
 
             argazkia.setIcon(new javax.swing.ImageIcon(getClass().getResource(MainGUI.marrazkiak.get(aleatorio).getImagen())));
-            aleatorio++;
             labelzuzena.setVisible(false);
             labelOkerra.setVisible(false);
             palabraIntro.setText("");
@@ -47,6 +47,21 @@ public class AsmatuGUI extends javax.swing.JFrame {
 
     }
 
+    public void frogratuHitza(){
+            if (palabraIntro.getText().toLowerCase().equals(MainGUI.marrazkiak.get(aleatorio).getIzena())) {
+            labelzuzena.setVisible(true);
+            labelOkerra.setVisible(false);
+
+        } else {
+            palabraIntro.setText("");
+            labelzuzena.setVisible(false);
+            labelOkerra.setVisible(true);
+
+        }
+
+
+    
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -142,17 +157,7 @@ public class AsmatuGUI extends javax.swing.JFrame {
     private void frogratuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frogratuActionPerformed
         // TODO add your handling code here:
         System.out.println(MainGUI.marrazkiak.get(aleatorio).getIzena());
-        if (palabraIntro.getText().toLowerCase().equals(MainGUI.marrazkiak.get(aleatorio).getIzena())) {
-            labelzuzena.setVisible(true);
-            labelOkerra.setVisible(false);
-
-        } else {
-            palabraIntro.setText("");
-            labelzuzena.setVisible(false);
-            labelOkerra.setVisible(true);
-
-        }
-
+        frogratuHitza();
 
     }//GEN-LAST:event_frogratuActionPerformed
 
