@@ -1,10 +1,4 @@
-
-
-import java.util.ArrayList;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.showMessageDialog;
+package gui;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -34,6 +28,8 @@ public class AsmatuGUI extends javax.swing.JFrame {
     public void aldatuArgazkia() {
         aleatorio = (int) (Math.random() * MainGUI.marrazkiak.size());
        argazkia.setIcon(new javax.swing.ImageIcon(getClass().getResource(MainGUI.marrazkiak.get(aleatorio).getImagen())));
+       labelzuzena.setVisible(false);
+       labelOkerra.setVisible(false);
 
     }
 
@@ -51,8 +47,10 @@ public class AsmatuGUI extends javax.swing.JFrame {
         frogratu = new javax.swing.JButton();
         argazkia = new javax.swing.JLabel();
         cambiar = new javax.swing.JButton();
-        abrirButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        labelOkerra = new javax.swing.JLabel();
+        labelzuzena = new javax.swing.JLabel();
+        pistaButton = new javax.swing.JButton();
+        printPistalbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 153));
@@ -73,7 +71,7 @@ public class AsmatuGUI extends javax.swing.JFrame {
                 palabraIntroActionPerformed(evt);
             }
         });
-        getContentPane().add(palabraIntro, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 810, 180, 40));
+        getContentPane().add(palabraIntro, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 800, 180, 40));
 
         frogratu.setText("Frogatu");
         frogratu.addActionListener(new java.awt.event.ActionListener() {
@@ -81,7 +79,7 @@ public class AsmatuGUI extends javax.swing.JFrame {
                 frogratuActionPerformed(evt);
             }
         });
-        getContentPane().add(frogratu, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 810, 110, 50));
+        getContentPane().add(frogratu, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 810, 110, 40));
 
         argazkia.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(argazkia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 700, 700));
@@ -94,20 +92,32 @@ public class AsmatuGUI extends javax.swing.JFrame {
         });
         getContentPane().add(cambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 810, 150, 40));
 
-        abrirButton.setText("Abrir");
-        abrirButton.addActionListener(new java.awt.event.ActionListener() {
+        labelOkerra.setVisible(false);
+        labelOkerra.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        labelOkerra.setForeground(new java.awt.Color(255, 51, 51));
+        labelOkerra.setText("OKERRA!!");
+        getContentPane().add(labelOkerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 620, 250, 70));
+
+        labelzuzena.setVisible(false);
+        labelzuzena.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        labelzuzena.setForeground(new java.awt.Color(51, 204, 0));
+        labelzuzena.setText("ZUZENA!!!!!");
+        getContentPane().add(labelzuzena, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 620, 310, 70));
+
+        pistaButton.setText("Pista bat eman");
+        pistaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                abrirButtonActionPerformed(evt);
+                pistaButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(abrirButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 800, -1, -1));
+        getContentPane().add(pistaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 110, 170, 40));
 
-        jLabel1.setText("Puntuazioa");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 100, 70, 80));
+        printPistalbl.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        printPistalbl.setText("_ _ _ _ _ _ _ _ _ _ _ ");
+        getContentPane().add(printPistalbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 330, 350, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void palabraIntroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_palabraIntroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_palabraIntroActionPerformed
@@ -116,9 +126,12 @@ public class AsmatuGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
             System.out.println(MainGUI.marrazkiak.get(aleatorio).getIzena());
         if (palabraIntro.getText().toLowerCase().equals(MainGUI.marrazkiak.get(aleatorio).getIzena())) {
-            showMessageDialog(null, "LAS PALABRAS COINCIDEN", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
+           labelzuzena.setVisible(true);
+           labelOkerra.setVisible(false);
         } else {
-            showMessageDialog(null, "LAS PLABRAS NO COINCIDEN", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
+           labelzuzena.setVisible(false);
+           labelOkerra.setVisible(true);
+
         }
 
 
@@ -132,11 +145,22 @@ public class AsmatuGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cambiarActionPerformed
 
-    private void abrirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirButtonActionPerformed
+    private void pistaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pistaButtonActionPerformed
         // TODO add your handling code here:
-        JFrame entrar = new MarraztuGUI();
-	entrar.setVisible(true);
-    }//GEN-LAST:event_abrirButtonActionPerformed
+       
+       
+       String guion= "";
+       
+       for(int i =1 ; i<=MainGUI.marrazkiak.get(aleatorio).getLetraZenbakia(); i++){
+       
+       guion = guion+" _";
+       
+       }
+       // printPistalbl.setText(MainGUI.marrazkiak.get(aleatorio).getLetraZenbakia()+"");
+        printPistalbl.setText(guion);
+
+
+    }//GEN-LAST:event_pistaButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,12 +199,14 @@ public class AsmatuGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton abrirButton;
     private javax.swing.JLabel argazkia;
     private javax.swing.JButton cambiar;
     private javax.swing.JButton frogratu;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel labelOkerra;
+    private javax.swing.JLabel labelzuzena;
     private javax.swing.JTextField palabraIntro;
+    private javax.swing.JButton pistaButton;
+    private javax.swing.JLabel printPistalbl;
     private java.awt.Label titulo;
     // End of variables declaration//GEN-END:variables
 }

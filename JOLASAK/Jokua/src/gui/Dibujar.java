@@ -1,4 +1,7 @@
+package gui;
 
+
+import model.Marrazkia;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;

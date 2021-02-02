@@ -1,3 +1,5 @@
+package model;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,7 +18,7 @@ public class Marrazkia {
     
     public Marrazkia(int id, String izena, String imagen) {
         this.id = id;
-        this.izena = izena;
+        this.izena = izena.toLowerCase();
         this.argazkiIzena= imagen.toLowerCase();
         this.imagen = "/img/"+imagen.toLowerCase()+".png";
          //this.imagen = "/img/"+imagen.toLowerCase()+".png";

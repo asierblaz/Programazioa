@@ -1,7 +1,9 @@
+package gui;
+
 
 import java.util.ArrayList;
 import javax.swing.JFrame;
-
+import model.Marrazkia;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -14,7 +16,7 @@ import javax.swing.JFrame;
  */
 public class MainGUI extends javax.swing.JFrame {
 
-        static ArrayList<Marrazkia> marrazkiak;
+      static ArrayList<Marrazkia> marrazkiak;
 
 
     public MainGUI() {
@@ -27,17 +29,16 @@ public class MainGUI extends javax.swing.JFrame {
     public  void sortu() {
         int id = 0;
         marrazkiak = new ArrayList<>();
-        marrazkiak.add(new Marrazkia(id++, "h", "h"));
-       
-       
-    }
+        marrazkiak.add(new Marrazkia(id++, "etxea", "etxea"));
+        marrazkiak.add(new Marrazkia(id++, "JAPON", "JAPON"));
+        marrazkiak.add(new Marrazkia(id++, "arraina", "arraina"));
+        marrazkiak.add(new Marrazkia(id++, "azterketa", "azterketa"));
+        marrazkiak.add(new Marrazkia(id++, "facebook", "facebook"));
 
-        public static void ArrayeanGehitu(Marrazkia m){ 
-            marrazkiak.add(m);
-    }
         
-
-
+       
+       
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,7 +52,7 @@ public class MainGUI extends javax.swing.JFrame {
         asmatuButton = new javax.swing.JButton();
         titulolabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         marraztuButton.setText("MARRAZTU");

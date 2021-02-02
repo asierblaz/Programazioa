@@ -1,4 +1,8 @@
+package gui;
 
+
+import model.Marrazkia;
+import gui.MainGUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -66,6 +70,11 @@ public class MarraztuGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Herramientas");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -128,7 +137,7 @@ public class MarraztuGUI extends javax.swing.JFrame {
             Marrazkia m = new Marrazkia(1, izena, imagen);
             System.out.println(m);
             lienzo.save(m);
-            MainGUI.ArrayeanGehitu(m);
+            MainGUI.marrazkiak.add(m);
             System.out.println( MainGUI.marrazkiak);
            JOptionPane.showMessageDialog(null, "Marrazkia Gorde da", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
@@ -166,6 +175,12 @@ public class MarraztuGUI extends javax.swing.JFrame {
 
         lienzo.borragoma();
     }//GEN-LAST:event_borragomaButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+       //cuando se cierra la ventana
+        
+        frame.dispose();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
