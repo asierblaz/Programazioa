@@ -52,6 +52,7 @@ public class AsmatuGUI extends javax.swing.JFrame {
             timer.start();
             tiempo = 25;   //cambiar este valor para cambiar el tiempo
             timeLabel.setText(tiempo + "");
+            frogatu.setEnabled(true);
 
         }
 
@@ -60,6 +61,8 @@ public class AsmatuGUI extends javax.swing.JFrame {
     public void frogratuHitza() {
         if (palabraIntro.getText().toLowerCase().equals(MainGUI.marrazkiak.get(aleatorio).getIzena())) {
             labelzuzena.setVisible(true);
+            frogatu.setEnabled(false);
+            pistaButton.setVisible(false);
             labelOkerra.setVisible(false);
             timer.stop();
 
@@ -67,8 +70,18 @@ public class AsmatuGUI extends javax.swing.JFrame {
             palabraIntro.setText("");
             labelzuzena.setVisible(false);
             labelOkerra.setVisible(true);
+            if(tiempo<=0){
+            pistaButton.setVisible(false);
+            frogatu.setEnabled(false);
+
+            }
+
+
 
         }
+          if(tiempo<=0){
+          pistaLabel.setText(MainGUI.marrazkiak.get(aleatorio).getIzena());
+             }
 
     }
 
@@ -137,7 +150,7 @@ public class AsmatuGUI extends javax.swing.JFrame {
 
         titulo = new java.awt.Label();
         palabraIntro = new javax.swing.JTextField();
-        frogratu = new javax.swing.JButton();
+        frogatu = new javax.swing.JButton();
         argazkia = new javax.swing.JLabel();
         cambiar = new javax.swing.JButton();
         labelOkerra = new javax.swing.JLabel();
@@ -169,13 +182,13 @@ public class AsmatuGUI extends javax.swing.JFrame {
         });
         getContentPane().add(palabraIntro, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 380, 340, 60));
 
-        frogratu.setText("Frogatu");
-        frogratu.addActionListener(new java.awt.event.ActionListener() {
+        frogatu.setText("Frogatu");
+        frogatu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                frogratuActionPerformed(evt);
+                frogatuActionPerformed(evt);
             }
         });
-        getContentPane().add(frogratu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 390, 110, 40));
+        getContentPane().add(frogatu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 390, 110, 40));
 
         argazkia.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(argazkia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 700, 700));
@@ -206,10 +219,10 @@ public class AsmatuGUI extends javax.swing.JFrame {
                 pistaButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(pistaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 110, 170, 40));
+        getContentPane().add(pistaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 200, 170, 40));
 
         timeLabel.setFont(new java.awt.Font("Dialog", 0, 48)); // NOI18N
-        getContentPane().add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 70, 180, 120));
+        getContentPane().add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 70, 180, 120));
 
         pistaLabel.setVisible(false);
         pistaLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -222,12 +235,12 @@ public class AsmatuGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_palabraIntroActionPerformed
 
-    private void frogratuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frogratuActionPerformed
+    private void frogatuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frogatuActionPerformed
         // TODO add your handling code here:
         System.out.println(MainGUI.marrazkiak.get(aleatorio).getIzena());
         frogratuHitza();
 
-    }//GEN-LAST:event_frogratuActionPerformed
+    }//GEN-LAST:event_frogatuActionPerformed
 
     private void cambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarActionPerformed
         // TODO add your handling code here:
@@ -282,7 +295,7 @@ public class AsmatuGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel argazkia;
     private javax.swing.JButton cambiar;
-    private javax.swing.JButton frogratu;
+    private javax.swing.JButton frogatu;
     private javax.swing.JLabel labelOkerra;
     private javax.swing.JLabel labelzuzena;
     private javax.swing.JTextField palabraIntro;
