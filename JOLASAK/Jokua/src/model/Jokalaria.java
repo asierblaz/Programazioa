@@ -5,11 +5,13 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author blazg
  */
-public class Jokalaria {
+public class Jokalaria implements Serializable{
     private String username;
     private int puntuazioa;
     private String asmatutakoak;
@@ -35,6 +37,13 @@ public class Jokalaria {
     public String getAsmatutakoak() {
         return asmatutakoak;
     }
+
+    @Override
+    public String toString() {
+        return "Jokalaria{" + "username=" + username + ", puntuazioa=" + puntuazioa + ", asmatutakoak=" + asmatutakoak + '}';
+    }
+
+
 
 
 

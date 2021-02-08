@@ -2,10 +2,18 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showConfirmDialog;
 import javax.swing.Timer;
+import model.Jokalaria;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,9 +26,10 @@ import javax.swing.Timer;
  */
 public class AsmatuGUI extends javax.swing.JFrame {
 
-    private final int puntuazioa = 0;
+    private int puntuazioa = 0;
     private int aleatorio = -1;
     int tiempo = 25; //tiempo
+    private int zenbat;
 
     /**
      * Creates new form Asmatu
@@ -38,9 +47,12 @@ public class AsmatuGUI extends javax.swing.JFrame {
         aleatorio++;
         // aleatorio = (int) (Math.random() * MainGUI.marrazkiak.size());           
         if (aleatorio == MainGUI.marrazkiak.size() - 1) {
-            JOptionPane.showMessageDialog(null, "Partida amaituta", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
-            timeLabel.setVisible(false);
-            cambiar.setVisible(false);
+            try {
+                partidaAmaituta();
+            } catch (IOException ex) {
+                Logger.getLogger(AsmatuGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         } else {
 
             argazkia.setIcon(new javax.swing.ImageIcon(getClass().getResource(MainGUI.marrazkiak.get(aleatorio).getImagen())));
@@ -53,6 +65,7 @@ public class AsmatuGUI extends javax.swing.JFrame {
             tiempo = 25;   //cambiar este valor para cambiar el tiempo
             timeLabel.setText(tiempo + "");
             frogatu.setEnabled(true);
+            puntuazioLabel.setText("Puntuazioa: " + puntuazioa);
 
         }
 
@@ -64,24 +77,29 @@ public class AsmatuGUI extends javax.swing.JFrame {
             frogatu.setEnabled(false);
             pistaButton.setVisible(false);
             labelOkerra.setVisible(false);
+            puntuazioa = puntuazioa + 150;
+            zenbat = zenbat + 1;
+            if (tiempo < 10) {
+                puntuazioa = puntuazioa - 20;
+
+            }
+
             timer.stop();
 
         } else {
             palabraIntro.setText("");
             labelzuzena.setVisible(false);
             labelOkerra.setVisible(true);
-            if(tiempo<=0){
-            pistaButton.setVisible(false);
-            frogatu.setEnabled(false);
+            if (tiempo <= 0) {
+                pistaButton.setVisible(false);
+                frogatu.setEnabled(false);
 
             }
 
-
-
         }
-          if(tiempo<=0){
-          pistaLabel.setText(MainGUI.marrazkiak.get(aleatorio).getIzena());
-             }
+        if (tiempo <= 0) {
+            pistaLabel.setText(MainGUI.marrazkiak.get(aleatorio).getIzena());
+        }
 
     }
 
@@ -92,8 +110,8 @@ public class AsmatuGUI extends javax.swing.JFrame {
 
             tiempo--;
             timeLabel.setText(tiempo + "");
-            if(tiempo == 10){
-            pistaLetra();
+            if (tiempo == 10) {
+                pistaLetra();
             }
             if (tiempo == 0) {
                 timer.stop();
@@ -105,6 +123,7 @@ public class AsmatuGUI extends javax.swing.JFrame {
 
     public void pistaBatEman() {
 
+        puntuazioa = puntuazioa - 30;
         pistaButton.setVisible(false);
         pistaLabel.setVisible(true);
         String guion = "";
@@ -127,7 +146,7 @@ public class AsmatuGUI extends javax.swing.JFrame {
         String guion = "";
 
         for (int i = 1; i <= MainGUI.marrazkiak.get(aleatorio).getLetraZenbakia(); i++) {
-            if (i == al+1) {
+            if (i == al + 1) {
                 guion = guion + " " + izena.charAt(al);
             } else {
                 guion = guion + " _";
@@ -136,6 +155,30 @@ public class AsmatuGUI extends javax.swing.JFrame {
 
         }
         pistaLabel.setText(guion);
+
+    }
+
+    public void partidaAmaituta() throws FileNotFoundException, IOException {
+        JOptionPane.showMessageDialog(null, "Partida amaituta", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
+        timeLabel.setVisible(false);
+        cambiar.setVisible(false);
+
+        int input = showConfirmDialog(null, "Zure Puntuazioa Gorde nahi duzu?");
+        if (input == 0) {
+            String username = JOptionPane.showInputDialog("Sartu zure erabiltzaile izena:");
+            
+          
+
+            try {
+             MainGUI.jokalariak= PuntuazioaGUI.itzuli();
+             MainGUI.jokalariak.add(new Jokalaria(username, puntuazioa, MainGUI.marrazkiak.size() + ""));
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AsmatuGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            PuntuazioaGUI.gorde(MainGUI.jokalariak);
+
+        }
 
     }
 
@@ -158,6 +201,7 @@ public class AsmatuGUI extends javax.swing.JFrame {
         pistaButton = new javax.swing.JButton();
         timeLabel = new java.awt.Label();
         pistaLabel = new javax.swing.JLabel();
+        puntuazioLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 153));
@@ -228,6 +272,10 @@ public class AsmatuGUI extends javax.swing.JFrame {
         pistaLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         pistaLabel.setText("_ _ _ _ _ _ _ _ _ _ _");
         getContentPane().add(pistaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 350, 60));
+
+        puntuazioLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        puntuazioLabel.setText("Puntuazioa: 0");
+        getContentPane().add(puntuazioLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 830, 280, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -301,6 +349,7 @@ public class AsmatuGUI extends javax.swing.JFrame {
     private javax.swing.JTextField palabraIntro;
     private javax.swing.JButton pistaButton;
     private javax.swing.JLabel pistaLabel;
+    private javax.swing.JLabel puntuazioLabel;
     private java.awt.Label timeLabel;
     private java.awt.Label titulo;
     // End of variables declaration//GEN-END:variables

@@ -3,6 +3,7 @@ package gui;
 
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import model.Jokalaria;
 import model.Marrazkia;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,6 +18,8 @@ import model.Marrazkia;
 public class MainGUI extends javax.swing.JFrame {
 
       static ArrayList<Marrazkia> marrazkiak;
+      
+      static ArrayList<Jokalaria> jokalariak= new ArrayList<>();
 
 
     public MainGUI() {
@@ -51,6 +54,7 @@ public class MainGUI extends javax.swing.JFrame {
         marraztuButton = new javax.swing.JButton();
         asmatuButton = new javax.swing.JButton();
         titulolabel = new javax.swing.JLabel();
+        puntuazioaButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -61,7 +65,7 @@ public class MainGUI extends javax.swing.JFrame {
                 marraztuButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(marraztuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 200, 110));
+        getContentPane().add(marraztuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 200, 110));
 
         asmatuButton.setText("ASMATU");
         asmatuButton.addActionListener(new java.awt.event.ActionListener() {
@@ -69,12 +73,20 @@ public class MainGUI extends javax.swing.JFrame {
                 asmatuButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(asmatuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 330, 200, 110));
+        getContentPane().add(asmatuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 290, 200, 110));
 
         titulolabel.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
         titulolabel.setForeground(new java.awt.Color(0, 51, 255));
         titulolabel.setText("MARRAZKILLO");
         getContentPane().add(titulolabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 440, 90));
+
+        puntuazioaButton.setText("Puntuazioa");
+        puntuazioaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                puntuazioaButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(puntuazioaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 290, 200, 110));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -92,6 +104,12 @@ public class MainGUI extends javax.swing.JFrame {
         JFrame entrar = new AsmatuGUI();
         entrar.setVisible(true);
     }//GEN-LAST:event_asmatuButtonActionPerformed
+
+    private void puntuazioaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_puntuazioaButtonActionPerformed
+        // TODO add your handling code here:
+              JFrame entrar = new PuntuazioaGUI();
+        entrar.setVisible(true);
+    }//GEN-LAST:event_puntuazioaButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,6 +149,7 @@ public class MainGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton asmatuButton;
     private javax.swing.JButton marraztuButton;
+    private javax.swing.JButton puntuazioaButton;
     private javax.swing.JLabel titulolabel;
     // End of variables declaration//GEN-END:variables
 }
