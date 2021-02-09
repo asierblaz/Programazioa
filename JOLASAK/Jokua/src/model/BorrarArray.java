@@ -12,30 +12,37 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  *
  * @author blazg
  */
-public class Main {
+public class BorrarArray {
 
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
       ArrayList<Jokalaria> jokalariak = new ArrayList<>();
 
-        jokalariak.add(new Jokalaria("ASIER", 800, "2"));
+        jokalariak.add(new Jokalaria("ASIER", -30, "2"));
+        
        
 
-        FileOutputStream fout = new FileOutputStream("output.txt");
+        FileOutputStream fout = new FileOutputStream("src/resources/output.txt");
         ObjectOutputStream out = new ObjectOutputStream(fout);
         out.writeObject(jokalariak);
         out.close();
 
-        FileInputStream fin = new FileInputStream("output.txt");
+        FileInputStream fin = new FileInputStream("src/resources/output.txt");
         ObjectInputStream ois = new ObjectInputStream(fin);
         ArrayList<Jokalaria> jokalariak2 = (ArrayList<Jokalaria>) ois.readObject();
-        for (Jokalaria jokalaria : jokalariak2) {
-           
-        }
+      
+        
+        System.out.println(jokalariak2);
+        System.out.println("ordenado");
+       
+        
+        System.out.println(jokalariak2);
         
         
         

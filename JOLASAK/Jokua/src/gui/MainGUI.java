@@ -25,6 +25,7 @@ public class MainGUI extends javax.swing.JFrame {
     public MainGUI() {
         initComponents();
         sortu();
+        this.setResizable(false);
     }
 
     
@@ -55,6 +56,7 @@ public class MainGUI extends javax.swing.JFrame {
         asmatuButton = new javax.swing.JButton();
         titulolabel = new javax.swing.JLabel();
         puntuazioaButton = new javax.swing.JButton();
+        fondolabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -87,6 +89,9 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(puntuazioaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 290, 200, 110));
+
+        fondolabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/58930.jpg"))); // NOI18N
+        getContentPane().add(fondolabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -148,6 +153,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton asmatuButton;
+    private javax.swing.JLabel fondolabel;
     private javax.swing.JButton marraztuButton;
     private javax.swing.JButton puntuazioaButton;
     private javax.swing.JLabel titulolabel;

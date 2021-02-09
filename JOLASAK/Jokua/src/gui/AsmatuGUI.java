@@ -166,19 +166,20 @@ public class AsmatuGUI extends javax.swing.JFrame {
         int input = showConfirmDialog(null, "Zure Puntuazioa Gorde nahi duzu?");
         if (input == 0) {
             String username = JOptionPane.showInputDialog("Sartu zure erabiltzaile izena:");
-            
-          
 
             try {
-             MainGUI.jokalariak= PuntuazioaGUI.itzuli();
-             MainGUI.jokalariak.add(new Jokalaria(username, puntuazioa, MainGUI.marrazkiak.size() + ""));
+                MainGUI.jokalariak = PuntuazioaGUI.itzuli();
+                MainGUI.jokalariak.add(new Jokalaria(username, puntuazioa, MainGUI.marrazkiak.size() + ""));
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(AsmatuGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             PuntuazioaGUI.gorde(MainGUI.jokalariak);
 
         }
+
+        JOptionPane.showMessageDialog(null, "Eskerrikasko Jolasteagaitik", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
 
     }
 

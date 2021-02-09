@@ -11,7 +11,8 @@ import java.io.Serializable;
  *
  * @author blazg
  */
-public class Jokalaria implements Serializable{
+public class Jokalaria implements Serializable, Comparable<Jokalaria> {
+
     private String username;
     private int puntuazioa;
     private String asmatutakoak;
@@ -26,16 +27,17 @@ public class Jokalaria implements Serializable{
         return username;
     }
 
-
-
     public int getPuntuazioa() {
         return puntuazioa;
     }
 
-
-
     public String getAsmatutakoak() {
         return asmatutakoak;
+    }
+
+    public void ordenatu() {
+
+        System.out.println("hola");
     }
 
     @Override
@@ -43,11 +45,15 @@ public class Jokalaria implements Serializable{
         return "Jokalaria{" + "username=" + username + ", puntuazioa=" + puntuazioa + ", asmatutakoak=" + asmatutakoak + '}';
     }
 
+    @Override
+    public int compareTo(Jokalaria o) {
 
-
-
-
-
+        if (puntuazioa < o.getPuntuazioa()) {
+            return 1;
+        }
+        if (puntuazioa > o.getPuntuazioa()) {
+            return -1;
+        }
+        return 0;
+    }
 }
-
-
