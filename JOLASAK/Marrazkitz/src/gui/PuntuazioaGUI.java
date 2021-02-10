@@ -65,7 +65,7 @@ public class PuntuazioaGUI extends javax.swing.JFrame {
         
         for(Jokalaria j: players){
             String s = "\nIZENA: "+ j.getUsername()+ "         PUNTUAZIOA: "+ j.getPuntuazioa()+"        ASMATUTAKOAK:  "+ j.getAsmatutakoak();
-            puntuLabel.setText(puntuLabel.getText()+ "\n "+ s);
+        
             System.out.println(s);
         }
         System.out.println(players);
@@ -78,6 +78,8 @@ public class PuntuazioaGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         puntuLabel = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -90,7 +92,22 @@ public class PuntuazioaGUI extends javax.swing.JFrame {
         puntuLabel.setRows(5);
         jScrollPane1.setViewportView(puntuLabel);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 730, 480));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 510, 390, 120));
+
+        jTable1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 790, 290));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -130,6 +147,8 @@ public class PuntuazioaGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea puntuLabel;
     // End of variables declaration//GEN-END:variables
 }
