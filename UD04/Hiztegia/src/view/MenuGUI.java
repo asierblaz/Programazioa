@@ -31,7 +31,8 @@ public class MenuGUI extends javax.swing.JFrame {
 
     public void hizkuntzaAldatu() {
         if (euskera == true) {
-            idiomaButton.setText("Castellano-> Euskera");
+            idiomaButton.setText("Euskera -> Gaztelania");
+            actual.setText("Castellano-> Euskera");
             labelHiztegia.setText("Diccionario");
             labelSartu.setText("Introducir Palabra");
             translateButton.setText("Traducir");
@@ -41,7 +42,8 @@ public class MenuGUI extends javax.swing.JFrame {
             euskera = false;
         } else {
 
-            idiomaButton.setText("Euskea -> Gaztelania");
+            actual.setText("Euskera-> Gaztelania");
+            idiomaButton.setText("Castellano-> Euskera");
             labelHiztegia.setText("Hiztegia");
             labelSartu.setText("Sartu Hitza");
             translateButton.setText("Itzuli");
@@ -87,6 +89,8 @@ public class MenuGUI extends javax.swing.JFrame {
         emaitzaLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         kudeaketaButton = new javax.swing.JButton();
+        actual = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -113,7 +117,7 @@ public class MenuGUI extends javax.swing.JFrame {
         });
         getContentPane().add(translateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 130, 40));
 
-        idiomaButton.setText("Euskera -> Gaztelania");
+        idiomaButton.setText("Gaztelania-> Euskera");
         idiomaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idiomaButtonActionPerformed(evt);
@@ -132,6 +136,10 @@ public class MenuGUI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(kudeaketaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, -1, -1));
+
+        actual.setText("Euskera-> Gaztelania");
+        getContentPane().add(actual, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 120, 80));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 140, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -203,10 +211,12 @@ public class MenuGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel actual;
     private javax.swing.JLabel emaitzaLabel;
     private javax.swing.JTextField hitzaField;
     private javax.swing.JButton idiomaButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton kudeaketaButton;
     private javax.swing.JLabel labelHiztegia;
     private javax.swing.JLabel labelSartu;

@@ -7,8 +7,10 @@ package view;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import model.FKudeatu;
 import model.Terminoa;
 
@@ -21,10 +23,16 @@ public class KudeatuGUI extends javax.swing.JFrame {
     /**
      * Creates new form KudeatuGUI
      */
+    DefaultTableModel modelo;
+    ArrayList<Terminoa> terminoak;
+
     public KudeatuGUI() {
         initComponents();
-        hiztegiText.setVisible(false);
-        hiztegiText.setEditable(false);
+        tabla.setVisible(false);
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Euskera");
+        modelo.addColumn("Gaztelera");
+        this.tabla.setModel(modelo);
     }
 
     public void hiztegianGehitu() {
@@ -39,9 +47,30 @@ public class KudeatuGUI extends javax.swing.JFrame {
         }
     }
 
-    public void hiztegiaIkusi() throws IOException, FileNotFoundException, ClassNotFoundException {
-        hiztegiText.setVisible(true);
-        hiztegiText.setText(FKudeatu.tImprimatu());
+    public void datuakKargatu() {
+        int numDatos = modelo.getRowCount();
+        for (int i = 0; i < numDatos; i++) {   //para borrar la tabla y no se sobrecargue
+            modelo.removeRow(0);
+        }
+        tabla.setVisible(true);
+        try {
+            terminoak = FKudeatu.arrayItzuli();
+        } catch (IOException ex) {
+            Logger.getLogger(KudeatuGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(KudeatuGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String[] info = new String[4];
+        int i = 0;
+        for (Terminoa t : terminoak) {
+
+            info[0] = t.getEuskara().toUpperCase()+" ";
+            info[1] = t.getGaztelera().toUpperCase()+" ";
+            modelo.addRow(info);
+            i++;
+
+        }
+
     }
 
     /**
@@ -61,10 +90,10 @@ public class KudeatuGUI extends javax.swing.JFrame {
         euskeraField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         emaitzaLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        hiztegiText = new javax.swing.JTextArea();
         HiztegiaButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
 
         jLabel4.setText("jLabel4");
 
@@ -104,12 +133,6 @@ public class KudeatuGUI extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 50, 30));
         getContentPane().add(emaitzaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 230, 40));
 
-        hiztegiText.setColumns(20);
-        hiztegiText.setRows(5);
-        jScrollPane1.setViewportView(hiztegiText);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 420, 290));
-
         HiztegiaButton.setText("Hiztegi Guztia Ikusi");
         HiztegiaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +141,21 @@ public class KudeatuGUI extends javax.swing.JFrame {
         });
         getContentPane().add(HiztegiaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 150, 40));
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 620, -1, -1));
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tabla);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 500, 150));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -147,14 +185,8 @@ public class KudeatuGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_gehituButtonActionPerformed
 
     private void HiztegiaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HiztegiaButtonActionPerformed
-        try {
-            // TODO add your handling code here:
-            hiztegiaIkusi();
-        } catch (IOException ex) {
-            Logger.getLogger(KudeatuGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(KudeatuGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        datuakKargatu();
     }//GEN-LAST:event_HiztegiaButtonActionPerformed
 
     /**
@@ -198,12 +230,12 @@ public class KudeatuGUI extends javax.swing.JFrame {
     private javax.swing.JTextField euskeraField;
     private javax.swing.JTextField gaztField;
     private javax.swing.JButton gehituButton;
-    private javax.swing.JTextArea hiztegiText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

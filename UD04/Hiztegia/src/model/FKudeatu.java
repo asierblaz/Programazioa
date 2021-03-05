@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,6 +26,14 @@ public class FKudeatu {
     private static String archivo = "hiztegia.dat";
 
     public FKudeatu() {
+    }
+
+    public static String getArchivo() {
+        return archivo;
+    }
+
+    public static void setArchivo(String archivo) {
+        FKudeatu.archivo = archivo;
     }
 
     public static Terminoa tBilatu(String hitza) throws FileNotFoundException, IOException, ClassNotFoundException {
@@ -72,6 +81,36 @@ public class FKudeatu {
         
         return s;
     }
+    
+     public static ArrayList<Terminoa> arrayItzuli() throws FileNotFoundException, IOException, ClassNotFoundException {
+         ArrayList<Terminoa> terminoak=new ArrayList<>();
+
+        FileInputStream fin = null;
+        try {
+            fin = new FileInputStream(archivo);
+            ObjectInputStream inStream = new ObjectInputStream(fin);
+            Terminoa t;
+            while (true) {
+                t = (Terminoa) inStream.readObject(); //
+                terminoak.add(t);
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println( "Fitxategia ez dago bere lekuan.");
+        } catch (IOException ex) {
+           
+        } catch (ClassNotFoundException ex) {
+            System.out.println("ClassNotFound Salbuespena gertatu da.");
+        } finally {
+            try {
+                fin.close();
+            } catch (Exception ex) {
+                Logger.getLogger(hiztegiaSortu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return terminoak;
+    }
+
 
     public static void tGehitu(Terminoa t) throws IOException {
         FileOutputStream fout = null;
