@@ -91,6 +91,7 @@ public class MenuGUI extends javax.swing.JFrame {
         kudeaketaButton = new javax.swing.JButton();
         actual = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -138,8 +139,11 @@ public class MenuGUI extends javax.swing.JFrame {
         getContentPane().add(kudeaketaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, -1, -1));
 
         actual.setText("Euskera-> Gaztelania");
-        getContentPane().add(actual, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 120, 80));
+        getContentPane().add(actual, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 110, 120, 80));
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 140, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/1.png"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 370, 260));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -217,6 +221,7 @@ public class MenuGUI extends javax.swing.JFrame {
     private javax.swing.JButton idiomaButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton kudeaketaButton;
     private javax.swing.JLabel labelHiztegia;
     private javax.swing.JLabel labelSartu;

@@ -33,6 +33,8 @@ public class KudeatuGUI extends javax.swing.JFrame {
         modelo.addColumn("Euskera");
         modelo.addColumn("Gaztelera");
         this.tabla.setModel(modelo);
+        tabla.setEnabled(false);
+        
     }
 
     public void hiztegianGehitu() {
