@@ -55,7 +55,7 @@ public class FKudeatu {
     }
 
     public static String tImprimatu() throws FileNotFoundException, IOException, ClassNotFoundException {
-        String s="";
+        String s = "";
         FileInputStream fin = null;
         try {
             fin = new FileInputStream(archivo);
@@ -63,14 +63,14 @@ public class FKudeatu {
             Terminoa t;
             while (true) {
                 t = (Terminoa) inStream.readObject(); //
-                s=s+t.toString();
+                s = s + t.toString();
             }
         } catch (FileNotFoundException ex) {
-           s= "Fitxategia ez dago bere lekuan.";
+            s = "Fitxategia ez dago bere lekuan.";
         } catch (IOException ex) {
-           
+
         } catch (ClassNotFoundException ex) {
-            s="ClassNotFound Salbuespena gertatu da.";
+            s = "ClassNotFound Salbuespena gertatu da.";
         } finally {
             try {
                 fin.close();
@@ -78,12 +78,12 @@ public class FKudeatu {
                 Logger.getLogger(hiztegiaSortu.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         return s;
     }
-    
-     public static ArrayList<Terminoa> arrayItzuli() throws FileNotFoundException, IOException, ClassNotFoundException {
-         ArrayList<Terminoa> terminoak=new ArrayList<>();
+
+    public static ArrayList<Terminoa> arrayItzuli() throws FileNotFoundException, IOException, ClassNotFoundException {
+        ArrayList<Terminoa> terminoak = new ArrayList<>();
 
         FileInputStream fin = null;
         try {
@@ -95,9 +95,9 @@ public class FKudeatu {
                 terminoak.add(t);
             }
         } catch (FileNotFoundException ex) {
-            System.out.println( "Fitxategia ez dago bere lekuan.");
+            System.out.println("Fitxategia ez dago bere lekuan.");
         } catch (IOException ex) {
-           
+
         } catch (ClassNotFoundException ex) {
             System.out.println("ClassNotFound Salbuespena gertatu da.");
         } finally {
@@ -107,10 +107,9 @@ public class FKudeatu {
                 Logger.getLogger(hiztegiaSortu.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         return terminoak;
     }
-
 
     public static void tGehitu(Terminoa t) throws IOException {
         FileOutputStream fout = null;

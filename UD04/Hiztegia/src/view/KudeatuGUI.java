@@ -34,7 +34,6 @@ public class KudeatuGUI extends javax.swing.JFrame {
         modelo.addColumn("Gaztelera");
         this.tabla.setModel(modelo);
         tabla.setEnabled(false);
-        
     }
 
     public void hiztegianGehitu() {
@@ -62,15 +61,19 @@ public class KudeatuGUI extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(KudeatuGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String[] info = new String[4];
-        int i = 0;
+        String[] info = new String[2]; 
         for (Terminoa t : terminoak) {
 
             info[0] = t.getEuskara().toUpperCase()+" ";
             info[1] = t.getGaztelera().toUpperCase()+" ";
             modelo.addRow(info);
-            i++;
 
+        }
+        
+        for( int i=0; i<terminoak.size();i++){
+        
+            Terminoa t= terminoak.get(i);
+            t.getEuskara();
         }
 
     }
