@@ -7,7 +7,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
-import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,11 +17,11 @@ import java.util.ArrayList;
  *
  * @author blazquez.asier
  */
-public class SQLiteKudeatu {
+public class SQLiteKudeatuBi {
 
     private static String url = "jdbc:sqlite:db/Hiztegia.db";
 
-    
+    ;
     public static void connect() {
         Connection conn = null;
         try {
@@ -57,9 +56,9 @@ public class SQLiteKudeatu {
         return conn;
     }
 
-    public static String terminoakImprimatu() {
+    public static void terminoakImprimatu() {
         String sql = "SELECT id, euskaraz, gazteleraz FROM Terminoak";
-        String s = "";
+
         try (Connection conn = connect2();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql)) {
@@ -67,22 +66,18 @@ public class SQLiteKudeatu {
             // loop through the result set
             while (rs.next()) {
 
-                s = s + rs.getInt("id") + "\t"
+                System.out.println(rs.getInt("id") + "\t"
                         + rs.getString("euskaraz") + "\t"
-                        + rs.getString("gazteleraz")+"\n";
+                        + rs.getString("gazteleraz"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
-        return s;
     }
 
-    public static void terminoaGehitu(Terminoa t) {
-
-        String euskaraz = t.getEuskara();
-        String gazteleraz = t.getGaztelera();
-
+    public static void terminoaGehitu(String euskaraz, String gazteleraz) {
+        
+        
         String sql = "INSERT INTO Terminoak(euskaraz,gazteleraz) VALUES(?,?)";
 
         try (Connection conn = connect2();
@@ -94,6 +89,8 @@ public class SQLiteKudeatu {
             System.out.println(e.getMessage());
         }
     }
+
+ 
 
     public static void terminoaEzabatu(int id) {
         String sql = "DELETE FROM Terminoak WHERE id = ?";
@@ -111,9 +108,9 @@ public class SQLiteKudeatu {
         }
     }
 
-    public static void terminoaAldatu(int id, Terminoa t) {
-        String euskaraz = t.getEuskara();
-        String gazteleraz = t.getGaztelera();
+    
+    
+        public static void terminoaAldatu(int id, String euskaraz, String gazteleraz) {
         String sql = "UPDATE Terminoak SET euskaraz = ? , "
                 + "gazteleraz = ? "
                 + "WHERE id = ?";
@@ -130,61 +127,5 @@ public class SQLiteKudeatu {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        
     }
-    
-    
-    public static String euskaraBilatu(String gazteleraz){
-        String sql = "SELECT euskaraz FROM Terminoak WHERE gazteleraz= ?";
-        String s = "";
-        try (Connection conn = connect2();
-                Statement stmt = conn.createStatement();
-             PreparedStatement pstmt  = conn.prepareStatement(sql)){
-            pstmt.setString(1,gazteleraz);
-            //
-            ResultSet rs  = pstmt.executeQuery();
-            // loop through the result set
-            while (rs.next()) {
-
-                s = s  + rs.getString("euskaraz") + "\t\n";
-
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        return s;
-    }
-    
-    
-        public static String gazteleraBilatu(String euskaraz){
-        String sql = "SELECT gazteleraz FROM Terminoak WHERE euskaraz= ?";
-        String s = "";
-        try (Connection conn = connect2();
-                Statement stmt = conn.createStatement();
-             PreparedStatement pstmt  = conn.prepareStatement(sql)){
-            pstmt.setString(1,euskaraz);
-            //
-            ResultSet rs  = pstmt.executeQuery();
-            // loop through the result set
-            while (rs.next()) {
-
-                s = s  + rs.getString("gazteleraz") + "\t\n";
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        return s;
-    }
-        
-      public static ArrayList<Terminoa> printToArray(){
-        
-          
-          
-      
-          
-      return null;
-      
-      }
 }

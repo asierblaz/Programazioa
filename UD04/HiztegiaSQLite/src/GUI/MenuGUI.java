@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package GUI;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import model.FKudeatu;
+import model.SQLiteKudeatu;
 import model.Terminoa;
 
 /**
@@ -54,14 +54,16 @@ public class MenuGUI extends javax.swing.JFrame {
             euskera = true;
         }
     }
-    public void translate() throws IOException, FileNotFoundException, ClassNotFoundException {
+ 
+    public void translate() {
         try {
             if (euskera == false) {
-                emaitzaLabel.setText("Euskera: " + FKudeatu.tBilatu(hitzaField.getText()).getEuskara().toUpperCase());
+                emaitzaLabel.setText("Euskera: "+ SQLiteKudeatu.euskaraBilatu(hitzaField.getText().toUpperCase()));
+           
             } else {
-                emaitzaLabel.setText("Gaztelera: " + FKudeatu.tBilatu(hitzaField.getText()).getGaztelera().toUpperCase());
+             emaitzaLabel.setText("Gaztelera: "+ SQLiteKudeatu.gazteleraBilatu(hitzaField.getText().toUpperCase()));
 
-            }
+                      }
         } catch (Exception e) {
             if (euskera == true) {
                 emaitzaLabel.setText("Hitza ez da aurkitu");
@@ -71,7 +73,6 @@ public class MenuGUI extends javax.swing.JFrame {
 
         }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,7 +106,7 @@ public class MenuGUI extends javax.swing.JFrame {
                 hitzaFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(hitzaField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 250, 40));
+        getContentPane().add(hitzaField, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 250, 40));
 
         labelSartu.setText("Sartu Hitza: ");
         getContentPane().add(labelSartu, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 140, 40));
@@ -141,6 +142,8 @@ public class MenuGUI extends javax.swing.JFrame {
         actual.setText("Euskera-> Gaztelania");
         getContentPane().add(actual, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 110, 120, 80));
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 140, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/1.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 370, 260));
 
         pack();
@@ -157,16 +160,7 @@ public class MenuGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_idiomaButtonActionPerformed
 
     private void translateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateButtonActionPerformed
-        if (!"".equals(hitzaField.getText())) {
-            try {
-                // TODO add your handling code here:ç
-                translate();
-            } catch (IOException ex) {
-                Logger.getLogger(MenuGUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(MenuGUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        translate();
     }//GEN-LAST:event_translateButtonActionPerformed
 
     private void kudeaketaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kudeaketaButtonActionPerformed
@@ -202,6 +196,8 @@ public class MenuGUI extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MenuGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

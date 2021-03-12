@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package GUI;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.FKudeatu;
+import model.SQLiteKudeatu;
 import model.Terminoa;
+import org.sqlite.SQLiteCommitListener;
 
 /**
  *
@@ -30,53 +32,63 @@ public class KudeatuGUI extends javax.swing.JFrame {
         initComponents();
         tabla.setVisible(false);
         modelo = new DefaultTableModel();
+        modelo.addColumn("Id");
         modelo.addColumn("Euskera");
         modelo.addColumn("Gaztelera");
         this.tabla.setModel(modelo);
         tabla.setEnabled(false);
     }
 
+    public void hiztegiaImprimatu() {
+        emaitzaLabel.setText("");
+        ImprimirText.setText(SQLiteKudeatu.terminoakImprimatu());
+    }
+
     public void hiztegianGehitu() {
 
+        Terminoa t = new Terminoa(euskeraField.getText().toLowerCase(), gaztField.getText().toLowerCase());
+        SQLiteKudeatu.terminoaGehitu(t);
+        emaitzaLabel.setText("Hitza hiztegian gehitu da");
+
+    }
+
+    public void hiztegitikEzabatu() {
+        hiztegiaImprimatu();
+        String id = JOptionPane.showInputDialog("Aukeratu termino bat bere id jarrita", JOptionPane.QUESTION_MESSAGE); 
+
         try {
-            FKudeatu.tGehitu(new Terminoa(euskeraField.getText().toLowerCase(), gaztField.getText().toLowerCase()));
-            emaitzaLabel.setText("Emaitza hiztegian gorde da");
-        } catch (IOException ex) {
-            Logger.getLogger(KudeatuGUI.class.getName()).log(Level.SEVERE, null, ex);
+            SQLiteKudeatu.terminoaEzabatu(Integer.parseInt(id));
+
+            hiztegiaImprimatu();
+            emaitzaLabel.setText("Hitza ezabatu da");
+
         } catch (Exception e) {
-            emaitzaLabel.setText("Ezin izan da hiztegian gorde");
+
+            JOptionPane.showMessageDialog(null, "Eremuak ezin dira hutsik gorde", "Errorea", JOptionPane.WARNING_MESSAGE);
+
         }
     }
 
-    public void datuakKargatu() {
-        int numDatos = modelo.getRowCount();
-        for (int i = 0; i < numDatos; i++) {   //para borrar la tabla y no se sobrecargue
-            modelo.removeRow(0);
-        }
-        tabla.setVisible(true);
+    public void hiztegiaUpdate(){
+     hiztegiaImprimatu();
+        String id = JOptionPane.showInputDialog("Aukeratu termino bat bere id jarrita", JOptionPane.QUESTION_MESSAGE);  
+        Terminoa t = new Terminoa(euskeraField.getText().toLowerCase(), gaztField.getText().toLowerCase());
+
         try {
-            terminoak = FKudeatu.arrayItzuli();
-        } catch (IOException ex) {
-            Logger.getLogger(KudeatuGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(KudeatuGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String[] info = new String[2]; 
-        for (Terminoa t : terminoak) {
+            SQLiteKudeatu.terminoaAldatu(Integer.parseInt(id),t);
 
-            info[0] = t.getEuskara().toUpperCase()+" ";
-            info[1] = t.getGaztelera().toUpperCase()+" ";
-            modelo.addRow(info);
+            hiztegiaImprimatu();
+            emaitzaLabel.setText("Hitza eguneratu da");
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, "Eremuak ezin dira hutsik gorde", "Errorea", JOptionPane.WARNING_MESSAGE);
 
         }
-        
-        for( int i=0; i<terminoak.size();i++){
-        
-            Terminoa t= terminoak.get(i);
-            t.getEuskara();
-        }
-
     }
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -99,6 +111,10 @@ public class KudeatuGUI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ImprimirText = new javax.swing.JTextArea();
+        EzabatuButton = new javax.swing.JButton();
+        updateButton = new javax.swing.JButton();
 
         jLabel4.setText("jLabel4");
 
@@ -162,6 +178,28 @@ public class KudeatuGUI extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 500, 150));
 
+        ImprimirText.setColumns(20);
+        ImprimirText.setRows(5);
+        jScrollPane1.setViewportView(ImprimirText);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 420, 300));
+
+        EzabatuButton.setText("Hiztegitik Ezabatu");
+        EzabatuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EzabatuButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(EzabatuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, 150, 40));
+
+        updateButton.setText("Hitza Aldatu");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(updateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 150, 40));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -178,21 +216,32 @@ public class KudeatuGUI extends javax.swing.JFrame {
 
         if (euskeraField.getText().equals("") || gaztField.equals("")) {
 
-            emaitzaLabel.setText("Eremuak ezin dira hutsik egon");
-
+            JOptionPane.showMessageDialog(null, "Eremuak ezin dira hutsik gorde", "Errorea", JOptionPane.WARNING_MESSAGE);
         } else {
             hiztegianGehitu();
+            hiztegiaImprimatu();
         }
 
         euskeraField.setText("");
         gaztField.setText("");
 
+
     }//GEN-LAST:event_gehituButtonActionPerformed
 
     private void HiztegiaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HiztegiaButtonActionPerformed
+        hiztegiaImprimatu();
 
-        datuakKargatu();
     }//GEN-LAST:event_HiztegiaButtonActionPerformed
+
+    private void EzabatuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EzabatuButtonActionPerformed
+        // TODO add your handling code here:
+        hiztegitikEzabatu();
+    }//GEN-LAST:event_EzabatuButtonActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        // TODO add your handling code here:
+        hiztegiaUpdate();
+    }//GEN-LAST:event_updateButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,6 +270,8 @@ public class KudeatuGUI extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -231,7 +282,9 @@ public class KudeatuGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton EzabatuButton;
     private javax.swing.JButton HiztegiaButton;
+    private javax.swing.JTextArea ImprimirText;
     private javax.swing.JLabel emaitzaLabel;
     private javax.swing.JTextField euskeraField;
     private javax.swing.JTextField gaztField;
@@ -241,7 +294,9 @@ public class KudeatuGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tabla;
+    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }
