@@ -22,7 +22,6 @@ public class SQLiteKudeatu {
 
     private static String url = "jdbc:sqlite:db/Hiztegia.db";
 
-    
     public static void connect() {
         Connection conn = null;
         try {
@@ -69,7 +68,7 @@ public class SQLiteKudeatu {
 
                 s = s + rs.getInt("id") + "\t"
                         + rs.getString("euskaraz") + "\t"
-                        + rs.getString("gazteleraz")+"\n";
+                        + rs.getString("gazteleraz") + "\n";
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -130,10 +129,9 @@ public class SQLiteKudeatu {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        
+
     }
-    
-    
+
     public static String euskaraBilatu(String gazteleraz){
         String sql = "SELECT euskaraz FROM Terminoak WHERE gazteleraz= ?";
         String s = "";
@@ -167,6 +165,7 @@ public class SQLiteKudeatu {
             //
             ResultSet rs  = pstmt.executeQuery();
             // loop through the result set
+            
             while (rs.next()) {
 
                 s = s  + rs.getString("gazteleraz") + "\t\n";
@@ -174,17 +173,28 @@ public class SQLiteKudeatu {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
+        
         return s;
     }
-        
-      public static ArrayList<Terminoa> printToArray(){
-        
-          
-          
-      
-          
-      return null;
-      
-      }
+
+    public static ArrayList<Terminoa> printToArray() {
+        String sql = "SELECT id, euskaraz, gazteleraz FROM Terminoak";
+        ArrayList<Terminoa> terminoak = new ArrayList<>();
+        String s = "";
+        try (Connection conn = connect2();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
+
+            // loop through the result set
+            while (rs.next()) {
+                terminoak.add(new Terminoa(rs.getString("euskaraz") ,  rs.getString("gazteleraz")));
+                
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return terminoak;
+    }
+
 }

@@ -1,5 +1,6 @@
 package exekutagarriak;
 
+import java.util.Arrays;
 import model.SQLiteKudeatu;
 import model.SQLiteKudeatuBi;
 
@@ -16,9 +17,14 @@ public class ProgramaNagusia {
 
     public static void main(String[] args) {
 
-        SQLiteKudeatuBi.terminoakImprimatu();
-
-        System.out.println(  SQLiteKudeatu.euskaraBilatu("manzana"));
-        System.out.println(  SQLiteKudeatu.gazteleraBilatu("sagarra"));
+        String s="";
+        
+       String euskera= SQLiteKudeatu.euskaraBilatu("ratson");
+       
+       if (euskera.equals(s)){
+           System.out.println("f");
+       
+       }
+       
     }
 }

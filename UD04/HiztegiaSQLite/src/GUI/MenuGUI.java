@@ -38,7 +38,7 @@ public class MenuGUI extends javax.swing.JFrame {
             translateButton.setText("Traducir");
             hitzaField.setText("");
             emaitzaLabel.setText("");
-             kudeaketaButton.setText("Entrar en la Administracion");
+            kudeaketaButton.setText("Entrar en la Administracion");
             euskera = false;
         } else {
 
@@ -54,18 +54,22 @@ public class MenuGUI extends javax.swing.JFrame {
             euskera = true;
         }
     }
- 
+
     public void translate() {
+
         try {
             if (euskera == false) {
-                emaitzaLabel.setText("Euskera: "+ SQLiteKudeatu.euskaraBilatu(hitzaField.getText().toUpperCase()));
-           
-            } else {
-             emaitzaLabel.setText("Gaztelera: "+ SQLiteKudeatu.gazteleraBilatu(hitzaField.getText().toUpperCase()));
 
-                      }
+                emaitzaLabel.setText("Euskera: " + SQLiteKudeatu.euskaraBilatu(hitzaField.getText().toLowerCase()));
+
+            } else {
+
+                emaitzaLabel.setText("Gaztelera: " + SQLiteKudeatu.gazteleraBilatu(hitzaField.getText().toLowerCase()));
+
+            }
         } catch (Exception e) {
             if (euskera == true) {
+
                 emaitzaLabel.setText("Hitza ez da aurkitu");
             } else {
                 emaitzaLabel.setText("La palabra no se ha encontrado");
@@ -73,6 +77,7 @@ public class MenuGUI extends javax.swing.JFrame {
 
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -164,12 +169,10 @@ public class MenuGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_translateButtonActionPerformed
 
     private void kudeaketaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kudeaketaButtonActionPerformed
-      JFrame entrar = new KudeatuGUI();
-      entrar.setVisible(true);
-        
-    }//GEN-LAST:event_kudeaketaButtonActionPerformed
+        JFrame entrar = new KudeatuGUI();
+        entrar.setVisible(true);
 
-    
+    }//GEN-LAST:event_kudeaketaButtonActionPerformed
 
     /**
      * @param args the command line arguments

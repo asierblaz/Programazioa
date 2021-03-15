@@ -36,13 +36,11 @@ public class KudeatuGUI extends javax.swing.JFrame {
         modelo.addColumn("Euskera");
         modelo.addColumn("Gaztelera");
         this.tabla.setModel(modelo);
-        tabla.setEnabled(false);
+        tabla.setEnabled(true);
+        datuakKargatu();
     }
 
-    public void hiztegiaImprimatu() {
-        emaitzaLabel.setText("");
-        ImprimirText.setText(SQLiteKudeatu.terminoakImprimatu());
-    }
+
 
     public void hiztegianGehitu() {
 
@@ -51,44 +49,110 @@ public class KudeatuGUI extends javax.swing.JFrame {
         emaitzaLabel.setText("Hitza hiztegian gehitu da");
 
     }
-
-    public void hiztegitikEzabatu() {
-        hiztegiaImprimatu();
-        String id = JOptionPane.showInputDialog("Aukeratu termino bat bere id jarrita", JOptionPane.QUESTION_MESSAGE); 
+    public void hiztegitikEzabatu1() {
+        datuakKargatu();
+        String id = JOptionPane.showInputDialog("Aukeratu termino bat bere id jarrita", JOptionPane.QUESTION_MESSAGE);
 
         try {
+            
             SQLiteKudeatu.terminoaEzabatu(Integer.parseInt(id));
 
-            hiztegiaImprimatu();
+            datuakKargatu();
             emaitzaLabel.setText("Hitza ezabatu da");
 
         } catch (Exception e) {
 
-            JOptionPane.showMessageDialog(null, "Eremuak ezin dira hutsik gorde", "Errorea", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Eremuak ezin dira hutsik jarri", "Errorea", JOptionPane.WARNING_MESSAGE);
+
+        }
+    }
+    
+    public void hiztegitikEzabatu() {
+
+      
+        try {
+           
+           SQLiteKudeatu.terminoaEzabatu(Integer.parseInt(tabla.getValueAt(tabla.getSelectedRow(), 0).toString()));
+
+            emaitzaLabel.setText("Hitza ezabatu da");
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, "Aukeratu taulatik bat", "Errorea", JOptionPane.WARNING_MESSAGE);
 
         }
     }
 
-    public void hiztegiaUpdate(){
-     hiztegiaImprimatu();
-        String id = JOptionPane.showInputDialog("Aukeratu termino bat bere id jarrita", JOptionPane.QUESTION_MESSAGE);  
+    public void hiztegiaUpdate() {
+    
+        String id = JOptionPane.showInputDialog("Aukeratu termino bat bere id jarrita", JOptionPane.QUESTION_MESSAGE);
         Terminoa t = new Terminoa(euskeraField.getText().toLowerCase(), gaztField.getText().toLowerCase());
 
         try {
-            SQLiteKudeatu.terminoaAldatu(Integer.parseInt(id),t);
+            SQLiteKudeatu.terminoaAldatu(Integer.parseInt(id), t);
 
-            hiztegiaImprimatu();
             emaitzaLabel.setText("Hitza eguneratu da");
 
         } catch (Exception e) {
 
-            JOptionPane.showMessageDialog(null, "Eremuak ezin dira hutsik gorde", "Errorea", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Eremuak ezin dira hutsik utzi", "Errorea", JOptionPane.WARNING_MESSAGE);
 
         }
     }
     
     
+        public void hiztegiaUpdate2() {
     
+      
+        try {
+            
+            String euskera= tabla.getValueAt(tabla.getSelectedRow(), 1).toString().toLowerCase();
+            String gaztelera= tabla.getValueAt(tabla.getSelectedRow(), 2).toString().toLowerCase();
+
+            Terminoa t = new Terminoa(euskera, gaztelera);
+
+         
+            SQLiteKudeatu.terminoaAldatu(Integer.parseInt(tabla.getValueAt(tabla.getSelectedRow(), 0).toString()), t);
+
+            emaitzaLabel.setText("Hitza eguneratu da");
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, "Taulatik hitz bat editatu behar duzu", "Errorea", JOptionPane.WARNING_MESSAGE);
+
+        }
+    }
+
+
+    public void datuakKargatu() {
+    
+        terminoak = SQLiteKudeatu.printToArray();
+
+        int numDatos = modelo.getRowCount();
+        for (int i = 0; i < numDatos; i++) {   //para borrar la tabla y no se sobrecargue
+            modelo.removeRow(0);
+        }
+        tabla.setVisible(true);
+
+
+        String[] info = new String[3];
+        int cont = 1;
+        for (Terminoa t : terminoak) {
+            info[0] = cont + "";
+            info[1] = t.getEuskara().toUpperCase() + " ";
+            info[2] = t.getGaztelera().toUpperCase() + " ";
+            modelo.addRow(info);
+            cont++;
+
+        }
+
+        for (int i = 0; i < terminoak.size(); i++) {
+
+            Terminoa t = terminoak.get(i);
+            t.getEuskara();
+        }
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -111,10 +175,9 @@ public class KudeatuGUI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        ImprimirText = new javax.swing.JTextArea();
         EzabatuButton = new javax.swing.JButton();
         updateButton = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         jLabel4.setText("jLabel4");
 
@@ -176,13 +239,7 @@ public class KudeatuGUI extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tabla);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 500, 150));
-
-        ImprimirText.setColumns(20);
-        ImprimirText.setRows(5);
-        jScrollPane1.setViewportView(ImprimirText);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 420, 300));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 560, 370));
 
         EzabatuButton.setText("Hiztegitik Ezabatu");
         EzabatuButton.addActionListener(new java.awt.event.ActionListener() {
@@ -200,6 +257,9 @@ public class KudeatuGUI extends javax.swing.JFrame {
         });
         getContentPane().add(updateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 150, 40));
 
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/1.png"))); // NOI18N
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, 370, 280));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -213,13 +273,11 @@ public class KudeatuGUI extends javax.swing.JFrame {
 
     private void gehituButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gehituButtonActionPerformed
         // TODO add your handling code here:
-
         if (euskeraField.getText().equals("") || gaztField.equals("")) {
-
             JOptionPane.showMessageDialog(null, "Eremuak ezin dira hutsik gorde", "Errorea", JOptionPane.WARNING_MESSAGE);
         } else {
             hiztegianGehitu();
-            hiztegiaImprimatu();
+            datuakKargatu();
         }
 
         euskeraField.setText("");
@@ -229,18 +287,21 @@ public class KudeatuGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_gehituButtonActionPerformed
 
     private void HiztegiaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HiztegiaButtonActionPerformed
-        hiztegiaImprimatu();
+        datuakKargatu();
 
     }//GEN-LAST:event_HiztegiaButtonActionPerformed
 
     private void EzabatuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EzabatuButtonActionPerformed
-        // TODO add your handling code here:
-        hiztegitikEzabatu();
+     //   hiztegitikEzabatu();
+      hiztegitikEzabatu();
+      datuakKargatu();
+
     }//GEN-LAST:event_EzabatuButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        hiztegiaUpdate();
+        hiztegiaUpdate2();
+        datuakKargatu();
     }//GEN-LAST:event_updateButtonActionPerformed
 
     /**
@@ -284,7 +345,6 @@ public class KudeatuGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EzabatuButton;
     private javax.swing.JButton HiztegiaButton;
-    private javax.swing.JTextArea ImprimirText;
     private javax.swing.JLabel emaitzaLabel;
     private javax.swing.JTextField euskeraField;
     private javax.swing.JTextField gaztField;
@@ -294,7 +354,7 @@ public class KudeatuGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tabla;
     private javax.swing.JButton updateButton;
