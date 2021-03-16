@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import model.SQLiteKudeatu;
 import model.Terminoa;
@@ -40,8 +41,6 @@ public class KudeatuGUI extends javax.swing.JFrame {
         datuakKargatu();
     }
 
-
-
     public void hiztegianGehitu() {
 
         Terminoa t = new Terminoa(euskeraField.getText().toLowerCase(), gaztField.getText().toLowerCase());
@@ -49,12 +48,13 @@ public class KudeatuGUI extends javax.swing.JFrame {
         emaitzaLabel.setText("Hitza hiztegian gehitu da");
 
     }
+
     public void hiztegitikEzabatu1() {
         datuakKargatu();
         String id = JOptionPane.showInputDialog("Aukeratu termino bat bere id jarrita", JOptionPane.QUESTION_MESSAGE);
 
         try {
-            
+
             SQLiteKudeatu.terminoaEzabatu(Integer.parseInt(id));
 
             datuakKargatu();
@@ -66,13 +66,12 @@ public class KudeatuGUI extends javax.swing.JFrame {
 
         }
     }
-    
+
     public void hiztegitikEzabatu() {
 
-      
         try {
-           
-           SQLiteKudeatu.terminoaEzabatu(Integer.parseInt(tabla.getValueAt(tabla.getSelectedRow(), 0).toString()));
+
+            SQLiteKudeatu.terminoaEzabatu(Integer.parseInt(tabla.getValueAt(tabla.getSelectedRow(), 0).toString()));
 
             emaitzaLabel.setText("Hitza ezabatu da");
 
@@ -84,7 +83,7 @@ public class KudeatuGUI extends javax.swing.JFrame {
     }
 
     public void hiztegiaUpdate() {
-    
+
         String id = JOptionPane.showInputDialog("Aukeratu termino bat bere id jarrita", JOptionPane.QUESTION_MESSAGE);
         Terminoa t = new Terminoa(euskeraField.getText().toLowerCase(), gaztField.getText().toLowerCase());
 
@@ -99,19 +98,16 @@ public class KudeatuGUI extends javax.swing.JFrame {
 
         }
     }
-    
-    
-        public void hiztegiaUpdate2() {
-    
-      
+
+    public void hiztegiaUpdate2() {
+
         try {
-            
-            String euskera= tabla.getValueAt(tabla.getSelectedRow(), 1).toString().toLowerCase();
-            String gaztelera= tabla.getValueAt(tabla.getSelectedRow(), 2).toString().toLowerCase();
+
+            String euskera = tabla.getValueAt(tabla.getSelectedRow(), 1).toString().toLowerCase();
+            String gaztelera = tabla.getValueAt(tabla.getSelectedRow(), 2).toString().toLowerCase();
 
             Terminoa t = new Terminoa(euskera, gaztelera);
 
-         
             SQLiteKudeatu.terminoaAldatu(Integer.parseInt(tabla.getValueAt(tabla.getSelectedRow(), 0).toString()), t);
 
             emaitzaLabel.setText("Hitza eguneratu da");
@@ -123,9 +119,8 @@ public class KudeatuGUI extends javax.swing.JFrame {
         }
     }
 
-
     public void datuakKargatu() {
-    
+
         terminoak = SQLiteKudeatu.printToArray();
 
         int numDatos = modelo.getRowCount();
@@ -133,7 +128,6 @@ public class KudeatuGUI extends javax.swing.JFrame {
             modelo.removeRow(0);
         }
         tabla.setVisible(true);
-
 
         String[] info = new String[3];
         int cont = 1;
@@ -237,6 +231,13 @@ public class KudeatuGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabla.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                tablaInputMethodTextChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(tabla);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 560, 370));
@@ -292,9 +293,9 @@ public class KudeatuGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_HiztegiaButtonActionPerformed
 
     private void EzabatuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EzabatuButtonActionPerformed
-     //   hiztegitikEzabatu();
-      hiztegitikEzabatu();
-      datuakKargatu();
+        //   hiztegitikEzabatu();
+        hiztegitikEzabatu();
+        datuakKargatu();
 
     }//GEN-LAST:event_EzabatuButtonActionPerformed
 
@@ -303,6 +304,9 @@ public class KudeatuGUI extends javax.swing.JFrame {
         hiztegiaUpdate2();
         datuakKargatu();
     }//GEN-LAST:event_updateButtonActionPerformed
+
+    private void tablaInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_tablaInputMethodTextChanged
+    }//GEN-LAST:event_tablaInputMethodTextChanged
 
     /**
      * @param args the command line arguments
