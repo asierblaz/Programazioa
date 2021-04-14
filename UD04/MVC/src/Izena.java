@@ -9,21 +9,12 @@
  * @author blazquez.asier
  */
 public class Izena {
-    
-    int id; 
+
     String izena;
 
-    public Izena(int id, String izena) {
-        this.id = id;
+    public Izena(String izena) {
+
         this.izena = izena;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getIzena() {
@@ -33,5 +24,5 @@ public class Izena {
     public void setIzena(String izena) {
         this.izena = izena;
     }
-    
+
 }

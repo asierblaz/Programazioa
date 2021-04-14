@@ -31,6 +31,7 @@ public class View extends javax.swing.JFrame {
         jTextAreaIzenak = new javax.swing.JTextArea();
         jButtonGehitu = new javax.swing.JButton();
         jTextFieldIzena = new javax.swing.JTextField();
+        jButtonEzabatu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -45,9 +46,12 @@ public class View extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 300, 220));
 
-        jButtonGehitu.setText("Gehitu");
-        getContentPane().add(jButtonGehitu, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 70, 30));
+        jButtonGehitu.setText("GEHITU");
+        getContentPane().add(jButtonGehitu, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 100, 30));
         getContentPane().add(jTextFieldIzena, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 310, 30));
+
+        jButtonEzabatu.setText("EZABATU");
+        getContentPane().add(jButtonEzabatu, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 110, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -97,10 +101,11 @@ public class View extends javax.swing.JFrame {
         return v;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton jButtonEzabatu;
     public javax.swing.JButton jButtonGehitu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextAreaIzenak;
-    private javax.swing.JTextField jTextFieldIzena;
+    public javax.swing.JTextArea jTextAreaIzenak;
+    public javax.swing.JTextField jTextFieldIzena;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,6 +19,7 @@ public class Controller implements ActionListener {
         this.model = model;
         this.view = view;
         anadirActionListener(this);       
+        imprimatu();
     }    
     private void anadirActionListener(ActionListener listener) {
         //GUIaren konponente guztiei gehitu listenerra
@@ -30,10 +31,25 @@ public class Controller implements ActionListener {
         //listenerrak entzun dezakeen eragiketa bakoitzeko. Konponenteek 'actionCommad' propietatea daukate
         switch (actionCommand) {
             case "GEHITU":
-                
-
+            izenaGehitu();
+            imprimatu();
+                    
         }
         
     }
     
+    
+    public void izenaGehitu(){
+       
+        Izena i = new Izena(view.jTextFieldIzena.getText());
+        model.izenaGehitu(i);
+        System.out.println("Izena dban gorde da");
+        
+    }
+   
+    
+    public void imprimatu(){
+    
+        view.jTextAreaIzenak.setText(model.izenakImprimatu());
+    }
 }
