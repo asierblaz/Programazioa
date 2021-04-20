@@ -21,7 +21,7 @@ public class Model {
 
     private static String url = "jdbc:sqlite:HerriakDB.db";
 
-    private static Connection connect() {
+    /*private static Connection connect() {
         // SQLite connection string
         Connection conn = null;
         try {
@@ -29,6 +29,18 @@ public class Model {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        return conn;
+
+    }*/
+    
+    
+        private static Connection connect() throws SQLException {
+        // SQLite connection string
+   
+         Connection conn = DriverManager.getConnection("jdbc:mariadb://192.168.65.1:3306/HerrienDBa", "dam1", "dam1");
+      // Connection conn = DriverManager.getConnection("jdbc:mariadb: //localhost/herriendba", "root", "");
+
+   
         return conn;
 
     }
@@ -55,6 +67,7 @@ public class Model {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            
         }
     }
 
@@ -80,7 +93,7 @@ public class Model {
         return s;
     }
 
-    public  ArrayList<Herria> inprimatuToArray() {
+    public ArrayList<Herria> inprimatuToArray() {
         String sql = "SELECT * FROM Herriak";
         ArrayList<Herria> herriak = new ArrayList<>();
         String s = "";
@@ -105,8 +118,8 @@ public class Model {
 
         return herriak;
     }
-    
-        public  void herriaEzabatu(String herria) {
+
+    public void herriaEzabatu(String herria) {
         String sql = "DELETE FROM Herriak WHERE Herria = ?";
 
         try (Connection conn = connect();
@@ -122,4 +135,22 @@ public class Model {
         }
     }
 
+    public void herriaAldatu(Herria h) {
+        System.out.println(h.getHerria());
+        System.out.println(h.getOharrak());
+        String sql = "UPDATE Herriak SET oharrak = ? WHERE Herria = ?";
+
+        try (Connection conn = connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // set the corresponding param
+            pstmt.setString(1, h.getOharrak());
+            pstmt.setString(2, h.getHerria());
+            // update 
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
 }

@@ -32,6 +32,7 @@ public class Controller implements ActionListener {
         //GUIaren konponente guztiei gehitu listenerra
         view.GehituButton.addActionListener(listener);
         view.EzabatuButton.addActionListener(listener);
+        view.AldatuButton.addActionListener(listener);
     }
 
     @Override
@@ -48,22 +49,36 @@ public class Controller implements ActionListener {
                 herriaEzabatu();
                 datuakKargatu();
                 break;
+
+            case "ALDATU":
+                aldatu();
+                datuakKargatu();
+                break;
         }
 
     }
 
     public void herriaGehitu() {
+        
         String herria = view.HerriaField.getText();
+    
         String probintzia = view.probintziaCombo.getSelectedItem() + "";
         String oharrak = view.OharrakTextArea.getText();
         boolean hondartza = false;
         if (view.hondartzaCheckBox.isSelected()) {
             hondartza = true;
         }
+        
+        if(herria.equals("")){
+        
+        JOptionPane.showMessageDialog(null, "Ezin da herria hutsik gehitu", "Informazioa", JOptionPane.WARNING_MESSAGE);
+
+        } else{
         Herria h = new Herria(herria, probintzia, hondartza, oharrak);
 
         model.herriaGehitu(h);
         JOptionPane.showMessageDialog(null, "Herria Gorde da", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
+        }
 
     }
 
@@ -82,10 +97,11 @@ public class Controller implements ActionListener {
             view.modelo.removeRow(0);
         }
         view.tabla.setVisible(true);
-
+        
         String[] info = new String[4];
-        int cont = 1;
+        
         for (Herria h : herriak) {
+            
             info[0] = h.getHerria();
             info[1] = h.getProbintzia();
             info[2] = h.isHondartza() + "";
@@ -98,15 +114,12 @@ public class Controller implements ActionListener {
 
     public void herriaEzabatu() {
 
-        String herria =view.tabla.getValueAt(view.tabla.getSelectedRow(),0)+"";
-        
         try {
-            
-            
+            String herria = view.tabla.getValueAt(view.tabla.getSelectedRow(), 0) + "";
+
             model.herriaEzabatu(herria);
             JOptionPane.showMessageDialog(null, "Herria Ezabatu da", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
 
-          
         } catch (Exception e) {
 
             JOptionPane.showMessageDialog(null, "Aukeratu taulatik bat", "Errorea", JOptionPane.WARNING_MESSAGE);
@@ -114,4 +127,25 @@ public class Controller implements ActionListener {
         }
 
     }
+
+    public void aldatu() {
+        try {
+            String herria = view.tabla.getValueAt(view.tabla.getSelectedRow(), 0) + "";
+            String probintzia = view.tabla.getValueAt(view.tabla.getSelectedRow(), 1) + "";
+            String oharrak = view.tabla.getValueAt(view.tabla.getSelectedRow(), 3) + "";
+            boolean hondartza = Boolean.parseBoolean(view.tabla.getValueAt(view.tabla.getSelectedRow(), 2) + "");
+            Herria h = new Herria(herria, probintzia, hondartza, oharrak);
+
+            model.herriaAldatu(h);
+            JOptionPane.showMessageDialog(null, "Herria Aldatu da", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
+
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, "Aukeratu taulatik bat eta editatu aldatzeko", "Errorea", JOptionPane.WARNING_MESSAGE);
+
+        }
+
+    }
+
 }
