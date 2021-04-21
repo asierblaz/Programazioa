@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author blazquez.asier
  */
+  import javax.swing.table.TableModel ;
 public class View extends javax.swing.JFrame {
 
     /**
@@ -19,18 +20,18 @@ public class View extends javax.swing.JFrame {
      */
     
     
-    DefaultTableModel modelo;
+    TaulaModeloa modelo;
            
 
     public View() {
         initComponents();
-        tabla.setVisible(false);
+      /* tabla.setVisible(false);
         modelo = new DefaultTableModel();
         modelo.addColumn("Herria");
         modelo.addColumn("Probintzia");
         modelo.addColumn("Hondartza");
-        modelo.addColumn("Oharra");
-        this.tabla.setModel(modelo);
+        modelo.addColumn("Oharra");*/
+       // this.tabla.setModel(modelo);
         tabla.setEnabled(true);
         
     }
@@ -87,7 +88,14 @@ public class View extends javax.swing.JFrame {
 
         EzabatuButton.setText("EZABATU");
 
-        tabla.setModel(new TaulaModeloa());
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
         jScrollPane2.setViewportView(tabla);
 
         jButton1.setText("Ezabatu Formularioa");

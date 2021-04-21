@@ -59,25 +59,25 @@ public class Controller implements ActionListener {
     }
 
     public void herriaGehitu() {
-        
+
         String herria = view.HerriaField.getText();
-    
+
         String probintzia = view.probintziaCombo.getSelectedItem() + "";
         String oharrak = view.OharrakTextArea.getText();
         boolean hondartza = false;
         if (view.hondartzaCheckBox.isSelected()) {
             hondartza = true;
         }
-        
-        if(herria.equals("")){
-        
-        JOptionPane.showMessageDialog(null, "Ezin da herria hutsik gehitu", "Informazioa", JOptionPane.WARNING_MESSAGE);
 
-        } else{
-        Herria h = new Herria(herria, probintzia, hondartza, oharrak);
+        if (herria.equals("")) {
 
-        model.herriaGehitu(h);
-        JOptionPane.showMessageDialog(null, "Herria Gorde da", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ezin da herria hutsik gehitu", "Informazioa", JOptionPane.WARNING_MESSAGE);
+
+        } else {
+            Herria h = new Herria(herria, probintzia, hondartza, oharrak);
+
+            model.herriaGehitu(h);
+            JOptionPane.showMessageDialog(null, "Herria Gorde da", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }
@@ -90,26 +90,36 @@ public class Controller implements ActionListener {
 
     public void datuakKargatu() {
 
-      herriak = model.inprimatuToArray();
+//        herriak = model.inprimatuToArray();
+//
+//        int numDatos = view.modelo.getRowCount();
+//        for (int i = 0; i < numDatos; i++) {   //para borrar la tabla y no se sobrecargue
+//            view.modelo.removeRow(0);
+//        }
+//        view.tabla.setVisible(true);
+//
+//        String[] info = new String[4];
+//
+//        for (Herria h : herriak) {
+//
+//            info[0] = h.getHerria();
+//            info[1] = h.getProbintzia();
+//
+//            if (h.isHondartza()) {
+//                info[2] = "BAI";
+//
+//            } else {
+//                info[2] = "EZ";
+//
+//            }
+//            info[3] = h.getOharrak();
+//            view.modelo.addRow(info);
+//
+//        }       
 
-        int numDatos = view.modelo.getRowCount();
-        for (int i = 0; i < numDatos; i++) {   //para borrar la tabla y no se sobrecargue
-            view.modelo.removeRow(0);
-        }
-        view.tabla.setVisible(true);
-        
-        String[] info = new String[4];
-        
-        for (Herria h : herriak) {
-            
-            info[0] = h.getHerria();
-            info[1] = h.getProbintzia();
-            info[2] = h.isHondartza() + "";
-            info[3] = h.getOharrak();
-            view.modelo.addRow(info);
+            view.modelo = new TaulaModeloa();
 
-        }
-
+            view.tabla.setModel(view.modelo);
     }
 
     public void herriaEzabatu() {
@@ -138,7 +148,6 @@ public class Controller implements ActionListener {
 
             model.herriaAldatu(h);
             JOptionPane.showMessageDialog(null, "Herria Aldatu da", "Informazioa", JOptionPane.INFORMATION_MESSAGE);
-
 
         } catch (Exception e) {
 
