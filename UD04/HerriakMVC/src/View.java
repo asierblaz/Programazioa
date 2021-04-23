@@ -232,6 +232,7 @@ public class View extends javax.swing.JFrame {
         });
         return v;
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton AldatuButton;
     public javax.swing.JButton EzabatuButton;
