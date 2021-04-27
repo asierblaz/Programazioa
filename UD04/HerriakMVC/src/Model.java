@@ -21,7 +21,7 @@ public class Model {
 
     private static String url = "jdbc:sqlite:HerriakDB.db";
 
-    /*private static Connection connect() {
+    private static Connection connect() {
         // SQLite connection string
         Connection conn = null;
         try {
@@ -31,9 +31,9 @@ public class Model {
         }
         return conn;
 
-    }*/
+    }
     
-    
+    /*
         private static Connection connect() throws SQLException {
         // SQLite connection string
    
@@ -43,7 +43,7 @@ public class Model {
    
         return conn;
 
-    }
+    }*/
 
     public void herriaGehitu(Herria h) {
         String herria = h.getHerria();
