@@ -46,32 +46,32 @@ public class Cliente {
         this.saldo = saldo;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.n_cuenta);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Cliente other = (Cliente) obj;
-        if (!Objects.equals(this.n_cuenta, other.n_cuenta)) {
-            return false;
-        }
-        return true;
-    }
-
-
-    
+//    @Override
+//    public int hashCode() {
+//        int hash = 7;
+//        hash = 17 * hash + Objects.hashCode(this.n_cuenta);
+//        return hash;
+//    }
+//
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+//        if (obj == null) {
+//            return false;
+//        }
+//        if (getClass() != obj.getClass()) {
+//            return false;
+//        }
+//        final Cliente other = (Cliente) obj;
+//        if (!Objects.equals(this.n_cuenta, other.n_cuenta)) {
+//            return false;
+//        }
+//        return true;
+//    }
+//
+//
+//    
     
 }

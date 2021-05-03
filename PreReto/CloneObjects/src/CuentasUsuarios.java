@@ -28,6 +28,8 @@ public class CuentasUsuarios {
         //3. Solo lectura?
         //Collection tipo set
         
+
+        
         Set <Cliente> clientesBanco = new HashSet<Cliente>();
         
         clientesBanco.add(cl1);
@@ -36,12 +38,15 @@ public class CuentasUsuarios {
         clientesBanco.add(cl4);
         clientesBanco.add(cl5); // se inserta, para java son objetos diferentes
         
+        
+
         for (Cliente cliente : clientesBanco) {
         
             System.out.println(cliente.getNombre()+ " "
                     + cliente.getN_cuenta()+" "+
                     " "+ cliente.getSaldo());
         }
+
 
     }
 }
